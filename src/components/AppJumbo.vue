@@ -6,7 +6,7 @@ export default {
         return {
         images: [
 
-            '/jumbo.png',
+            '/HERO.png',
         ],
         mainImage: 0,
         }
@@ -46,7 +46,7 @@ export default {
 @use '../style/general.scss';
 @import '../style/partials/_variables.scss';
 section{
-    background-color:#f7ae49;
+    background-color:$bg-secondary;
     
   
    

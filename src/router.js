@@ -14,7 +14,7 @@ const router = createRouter(
                 component: Home
             },
             {
-                path: '/dishes',
+                path: '/dishes/:id',
                 name: 'dish-list',
                 component: DishList
             },
