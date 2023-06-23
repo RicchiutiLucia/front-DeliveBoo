@@ -1,6 +1,7 @@
 <template>
 
     <AppHeader></AppHeader>
+    <AppJumbo></AppJumbo>
     
     <h1>Hello World</h1>
     <div v-if="categoriesLoaded" class="category-container" >
@@ -18,11 +19,13 @@
     import axios from 'axios';
     import {store} from '../store.js'
     import AppHeader from '../components/AppHeader.vue';
+    import AppJumbo from '../components/AppJumbo.vue';
 
     export default {
         name: 'Home',
         components: {
                 AppHeader,
+                AppJumbo
                     },
         data() {
             return {
@@ -80,6 +83,7 @@
 </script>
 
 <style scoped lang="scss">
+@use '../style/general.scss';
     .category-container {
         display: flex;
         justify-content: center;

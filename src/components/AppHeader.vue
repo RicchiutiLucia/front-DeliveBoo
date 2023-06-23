@@ -1,48 +1,99 @@
 <template>
 
-  <section>
-    <nav>
+  <!-- <section class="my-section">
+    <div class="w-100">
+        <nav class="d-flex justify-content-between align-items-center px-2">
         <div class="logo">
-            <img src="../../public/logo-deliveroo.png" alt="">
+            <img src="../../../public/logo-deliveroo.png" alt="logo" class="d-none d-lg-block my-logo">
+            <img src="../../../public/logo-sm-deliveroo.png" alt="logo" class="d-lg-none my-logo">
         </div>
         <ul>
-            <li class="nav-item" v-for="item in menuItems"> 
+            <li v-for="item in menuItems"> 
                     <router-link :to="{name: item.routeName}" class="nav-link">{{item.label}}</router-link>
             </li>
+            <li><a href="#">Ristoranti</a></li>
+            <li><a href="#">Contatti</a></li>
         </ul>
 
-        <ul>
-            <li>Login</li>
-            <li>Registrati</li>
-        </ul>
     </nav>
-  </section>
+
+    </div>
+    
+  </section> -->
+  <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="../../../public/logo-deliveroo.png" alt="logo" class="my-logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" v-for="item in menuItems"> 
+                        <router-link :to="{name: item.routeName}">{{item.label}}</router-link>
+                    </li>
+                    
+                </ul>
+            
+                </div>
+            </div>
+    </nav>
+
 </template>
 
 <style scoped lang="scss">
-section{
-    width: 100%;
-    height: 100vh;
+@use '../style/general.scss';
+@import '../style/partials/_variables.scss';
 
-    nav{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    right: 0;
-    left: 0;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
 
-    img{
-        width: 100px;
-        cursor: pointer;
-        margin: 7px 0;
-    }
-    }
 
-}
+ 
+  
+
+     nav{
+
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+  
+     width: 100%;
+     background-color: $bg-primary;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+     z-index: 1000;
+
+     .my-logo{
+         height: 100px;
+         cursor: pointer;
+         margin: 7px 0;
+     }
+     .my-logo-small{
+         width: 130px;
+         cursor: pointer;
+         margin: 7px 0;
+     }
+
+     ul{
+         list-style: none;
+         li{
+             margin: 0 15px;
+             display: inline-block;
+             text-decoration: none;
+                 color: white;
+             a{
+                 text-decoration: none;
+                 color: white;
+             }
+             a:hover{
+                 border-bottom: 2px solid white;
+             }
+
+
+         }
+      
+        
+     }
+     }
 
 
 
