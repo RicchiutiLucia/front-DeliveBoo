@@ -1,6 +1,7 @@
 <template>
 
     <AppHeader></AppHeader>
+    <AppJumbo></AppJumbo>
     
     <div v-if="categoriesLoaded" class="category-container" >
         <div class="category-card" v-for="(category, i) in categories"  @click="selectCategories(category.id)">{{ category.name }}</div>
@@ -17,11 +18,13 @@
     import axios from 'axios';
     import {store} from '../store.js'
     import AppHeader from '../components/AppHeader.vue';
+    import AppJumbo from '../components/AppJumbo.vue';
 
     export default {
         name: 'Home',
         components: {
                 AppHeader,
+                AppJumbo
                     },
         data() {
             return {
@@ -79,6 +82,7 @@
 </script>
 
 <style scoped lang="scss">
+@use '../style/general.scss';
     .category-container {
         display: flex;
         justify-content: center;
