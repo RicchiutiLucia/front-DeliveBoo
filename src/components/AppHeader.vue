@@ -7,7 +7,7 @@
         </div>
         <ul>
             <li class="nav-item" v-for="item in menuItems"> 
-                    <router-link :to="{name: item.routeName}" class="nav-link">{{item.label}}</router-link>
+                <router-link :to="{name: item.routeName}" class="nav-link">{{item.label}}</router-link>
             </li>
         </ul>
 

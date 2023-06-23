@@ -2,7 +2,6 @@
 
     <AppHeader></AppHeader>
     
-    <h1>Hello World</h1>
     <div v-if="categoriesLoaded" class="category-container" >
         <div class="category-card" v-for="(category, i) in categories"  @click="selectCategories(category.id)">{{ category.name }}</div>
     </div>
