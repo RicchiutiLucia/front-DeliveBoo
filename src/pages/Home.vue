@@ -1,4 +1,7 @@
 <template>
+
+    <AppHeader></AppHeader>
+    
     <h1>Hello World</h1>
     <div v-if="categoriesLoaded" class="category-container" >
         <div class="category-card" v-for="(category, i) in categories"  @click="selectCategories(category.id)">{{ category.name }}</div>
@@ -14,9 +17,13 @@
 <script>
     import axios from 'axios';
     import {store} from '../store.js'
+    import AppHeader from '../components/AppHeader.vue';
 
     export default {
         name: 'Home',
+        components: {
+                AppHeader,
+                    },
         data() {
             return {
                 categories: '',

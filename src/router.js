@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from './pages/Home.vue';
 import DishList from './pages/DishList.vue';
 import RestaurantList from './pages/RestaurantList.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = createRouter(
     {
