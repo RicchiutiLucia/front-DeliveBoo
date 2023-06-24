@@ -3,6 +3,7 @@ import Home from './pages/Home.vue';
 import DishList from './pages/DishList.vue';
 import RestaurantList from './pages/RestaurantList.vue';
 import NotFound from './pages/NotFound.vue';
+import Cart from './pages/Cart.vue'
 
 const router = createRouter(
     {
@@ -24,12 +25,17 @@ const router = createRouter(
                 component: RestaurantList
             },
             {
+                path: '/cart',
+                name: 'cart',
+                component: Cart
+            },
+            {
                 path: '/:pathMatch(.*)*',
                 name: 'not-found',
                 component: NotFound
             },
-            
-            
+
+
         ]
     }
 );
