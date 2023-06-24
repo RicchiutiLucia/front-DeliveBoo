@@ -7,7 +7,7 @@
     <div v-if="categoriesLoaded" class="category-container" >
         <div class="category-card" v-for="(category, i) in categories"  @click="selectCategories(category.id)">{{ category.name }}</div>
     </div>
-    <button @click="searchCategories(selected)">
+    <button @click="searchCategories(selected)" class=" ms_btn">
         Cerca
     </button>
     <div v-if="selectedRestaurants">
@@ -104,6 +104,7 @@
 
 <style scoped lang="scss">
 @use '../style/general.scss';
+@import '../style/partials/_variables.scss';
     .category-container {
         display: flex;
         justify-content: center;
@@ -111,13 +112,24 @@
             padding: 10px;
             border: 1px solid black;
             margin: 5px;
+            &active{
+                color: $bg-secondary;
+            }
             &:hover {
                 cursor: pointer;
+                background-color: $bg-secondary;
             }
+        
         }
-        .active {
-            background-color: blue;
-        }
+       
+       
     }
+.ms_btn{
+        background-color: $bg-primary;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        
+}
 
 </style>
