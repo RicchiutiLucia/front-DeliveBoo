@@ -29,7 +29,7 @@
             </div>
 
         </div>
-
+        <div>Totale: {{ sum.toFixed(2) }}</div>
     </div>
 </template>
 <script>
@@ -42,7 +42,7 @@ export default {
             store,
             order: [],
             dishes: [],
-
+            sum : 0,
             paperino: false
         }
     },
@@ -69,9 +69,9 @@ export default {
                     this.dishes = this.dishes.sort((a, b) => {
                         return a.id - b.id
                     })
+                    this.getTotal()
                 })
             });
-
         },
 
         addQuantityCart(id) {
@@ -90,7 +90,7 @@ export default {
                 console.log('order', this.order)
 
             })
-
+            this.getTotal()
 
 
         },
@@ -126,7 +126,18 @@ export default {
 
             })
 
-
+            this.getTotal()
+        },
+        getTotal() {
+            console.log(this.dishes);
+            this.sum = 0;
+                this.dishes.forEach((el, index) => {
+                    console.log('index', Number(el.price) * Number(this.order[index].quantity));
+                    this.sum +=  Number(el.price) * Number(this.order[index].quantity)
+                    
+                })
+            
+            
         }
 
     },
