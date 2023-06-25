@@ -21,7 +21,7 @@
 
 
                 </div>
-                <button @click="addToCart(dish.id)" class="ms_btn">
+                <button @click="addToCart(dish.id, quantity[index].quantity, index)" class="ms_btn">
                     <i class="fa-solid fa-cart-plus"></i>
                 </button>
             </div>
@@ -79,9 +79,19 @@ export default {
             })
 
         },
-        addToCart(id) {
-
+        addToCart(id, quantity, ix) {
+            let cartOrders = Object.values({ ...localStorage });
             let keys = Object.keys({ ...localStorage })
+            let myid = [];
+
+            if (cartOrders != '') {
+                cartOrders.forEach(el => {
+                    let newEl = JSON.parse(el)
+                    myid.push(newEl.id)
+                })
+                console.log(myid)
+            }
+
 
 
             if (keys.length) {
@@ -104,15 +114,37 @@ export default {
 
                 console.log(this.i)
             }
-            this.quantity.forEach(element => {
-                if (element.id == id && element.quantity > 0) {
-                    localStorage.setItem(`${this.i}`, JSON.stringify(element));
-                    this.i++
+
+            if (myid.includes(id)) {
+
+                cartOrders.forEach((el, index) => {
+                    const newEl = JSON.parse(el)
+                    if (newEl.id == id) {
+                        console.log('newEl', newEl)
+                        newEl.quantity += quantity
+                        localStorage.setItem(`${index + 1}`, JSON.stringify(newEl));
+                        console.log('quantity', this.quantity)
+
+                    }
+
+
+                })
+            } else {
+                this.quantity.forEach(element => {
+                    if (element.id == id && element.quantity > 0) {
+                        localStorage.setItem(`${this.i}`, JSON.stringify(element));
+                        this.i++
+                    }
+
+
                 }
-                element.quantity = 0
+                )
 
             }
-            )
+
+
+            this.quantity[ix].quantity = 0
+
 
             console.log({ ...localStorage })
         }
