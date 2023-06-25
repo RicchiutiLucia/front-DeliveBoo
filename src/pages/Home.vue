@@ -1,18 +1,9 @@
 <template>
-    <AppHeader></AppHeader>
     <AppJumbo></AppJumbo>
     <SingleCategoryCard></SingleCategoryCard>
 
 
-    <div v-if="categoriesLoaded" class="category-container">
-        <div class="category-card" v-for="(category, i) in categories" @click="selectCategories(category.id)">{{
-            category.name }}</div>
-    </div>
-    <button @click="searchCategories(selected)" class=" ms_btn">
-        Cerca
-    </button>
-    <h1 :class="!checkCategory ? 'd-none' : ''">SELEZIONE ALMENO 1 CATEGORIA</h1>
-
+    
     <h3 class="text-center my-3">SCEGLI LA CATEGORIA</h3>
     <div class="container" >
             <fieldset class="checkbox-group">
@@ -33,6 +24,7 @@
             <button @click="searchCategories(selected)" class=" ms_btn my-3">
             Cerca Risorante
             </button>
+            <h1 :class="!checkCategory ? 'd-none' : ''">SELEZIONE ALMENO 1 CATEGORIA</h1>
 
         </div> 
     </div>
@@ -73,7 +65,6 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js'
-import AppHeader from '../components/AppHeader.vue';
 import AppJumbo from '../components/AppJumbo.vue';
 import SingleCategoryCard from '../components/SingleCategoryCard.vue';
 
@@ -81,7 +72,6 @@ import SingleCategoryCard from '../components/SingleCategoryCard.vue';
 export default {
     name: 'Home',
     components: {
-        AppHeader,
         AppJumbo,
         SingleCategoryCard
     },

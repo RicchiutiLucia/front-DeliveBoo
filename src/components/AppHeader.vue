@@ -20,7 +20,7 @@
     </div>
     
   </section> -->
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg sticky-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
                     <img src="../../../public/logo-deliveroo.png" alt="logo" class="my-logo">
@@ -35,6 +35,7 @@
                         </li>
                     </ul>          
                 </div>
+
             </div>
     </nav>
 
@@ -60,9 +61,8 @@
      z-index: 1000;
 
      .my-logo{
-         height: 100px;
+         height: 70px;
          cursor: pointer;
-         margin: 7px 0;
      }
      .my-logo-small{
          width: 130px;
@@ -104,7 +104,10 @@
                         label: 'Home',
                         routeName: 'home'
                     },
-                   
+                    {
+                        label: 'Carrello',
+                        routeName: 'cart'
+                    }
                    
                 ]
             }
