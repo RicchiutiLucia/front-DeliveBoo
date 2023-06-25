@@ -97,22 +97,24 @@ export default {
         removeQuantityCart(id) {
             let cartOrders = Object.values({ ...localStorage });
             let cartOrdersKey = Object.keys({ ...localStorage });
+
+
             console.log('cartOrders', cartOrders)
             console.log('cartOrdersKey', cartOrdersKey)
             let ordersToChange = cartOrders.map(element => { return JSON.parse(element) });
             console.log('change', ordersToChange)
             ordersToChange.forEach((element, index) => {
                 if (element.id == id) {
-                    console.log('order', this.order)
-                    console.log('index', index)
+                    //console.log('order', this.order)
+                    //console.log('index', index)
                     if (element.quantity > 1) {
                         element.quantity--
-                        localStorage.setItem(`${index + 1}`, JSON.stringify(element));
+                        localStorage.setItem(`${cartOrdersKey[index]}`, JSON.stringify(element));
                         this.fillOrder()
                     } else {
-                        localStorage.removeItem(`${index + 1}`);
+                        localStorage.removeItem(`${cartOrdersKey[index]}`);
                         console.log('dishes1', this.dishes)
-                        this.dishes.splice(index)
+                        this.dishes.splice(index, 1)
                         console.log('dishes2', this.dishes)
                         this.fillOrder()
                         this.dishes = []
