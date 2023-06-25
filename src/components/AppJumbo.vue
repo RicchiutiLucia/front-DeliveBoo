@@ -26,7 +26,7 @@ export default {
                             <img class="img-fluid floating"  :src="images[mainImage]" alt="hero">
                         </div>
                         <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center  mb-3 ">
-                            <h2 class="text-center ms_title_font mb-4 text-md-left">Il tuo cibo preferito direttamente <br>a casa tua!</h2>
+                            <h1 class="text-center ms_title_font mb-4 text-md-left">IL TUO CIBO PREFERITO DIRETTAMENTE<br>A CASA TUA!</h1>
                             <a href="#restaurants-list" class="w-50 my-btn">Sfoglia i ristoranti</a>
                         </div>
                     </div>

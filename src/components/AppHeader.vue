@@ -26,16 +26,14 @@
                     <img src="../../../public/logo-deliveroo.png" alt="logo" class="my-logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item" v-for="item in menuItems"> 
-                        <router-link :to="{name: item.routeName}">{{item.label}}</router-link>
-                    </li>
-                    
-                </ul>
-            
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" v-for="item in menuItems"> 
+                            <router-link :to="{name: item.routeName}">{{item.label}}</router-link>
+                        </li>
+                    </ul>          
                 </div>
             </div>
     </nav>
@@ -56,7 +54,6 @@
      display: flex;
      justify-content: space-around;
      align-items: center;
-  
      width: 100%;
      background-color: $bg-primary;
      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -94,13 +91,6 @@
         
      }
      }
-
-
-
-
-
-
-
 </style>
 
 
