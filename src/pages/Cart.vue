@@ -118,6 +118,7 @@ export default {
                         console.log('dishes2', this.dishes)
                         this.fillOrder()
                         this.dishes = []
+                        
                         this.getDishes()
                     }
 
@@ -125,6 +126,7 @@ export default {
                 console.log('order', this.order)
 
             })
+
 
             this.getTotal()
         },
@@ -136,7 +138,9 @@ export default {
                     this.sum +=  Number(el.price) * Number(this.order[index].quantity)
                     
                 })
-            
+            if(Object.keys({...localStorage}).length === 0) {
+                this.store.isEmpty = true
+            }
             
         }
 

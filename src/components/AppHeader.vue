@@ -33,6 +33,13 @@
                         <li class="nav-item" v-for="item in menuItems"> 
                             <router-link :to="{name: item.routeName}">{{item.label}}</router-link>
                         </li>
+                        <li class="nav-item" >
+                            <i class="fa-solid fa-cart-shopping position-relative">
+                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" :class="{'d-none': store.isEmpty }">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                            </i>
+                        </li>
                     </ul>          
                 </div>
 
@@ -95,10 +102,12 @@
 
 
 <script>
+import {store} from '../store'
        export default {
         name: "AppHeader",
         data() {
             return {
+                store,
                 menuItems: [
                     {
                         label: 'Home',
@@ -107,10 +116,14 @@
                     {
                         label: 'Carrello',
                         routeName: 'cart'
-                    }
+                    },
                    
-                ]
+                ],
+                isEmpty: Object.keys({...localStorage }).length == 0
             }
+        },
+        mounted() {
+            console.log({...localStorage});
         }
     }
 
