@@ -1,10 +1,8 @@
-<template>
-    
-</template>
+<template></template>
 
 
 <script>
-    export default {
-        name: 'RestaurantList'
-    }
+export default {
+    name: 'RestaurantList'
+}
 </script>
