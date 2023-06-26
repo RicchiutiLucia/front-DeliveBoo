@@ -2,31 +2,33 @@
     <h1 class="text-center mb-3">Menu</h1>
     <div v-show="disableBtn" class="text-center">Non puoi aggiungere un piatto di un'altro ristorante</div>
     <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
-            <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index">
-                <div class="dish-img d-flex justify-content-center mt-3">
-                    <img class="rounded "  :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
-                </div>
-                <div class="px-3">
-                    <p class="text-center px-4 overflow-x-hidden">{{ dish.name }}</p>
-                    <p class="text-center">{{ dish.price }}</p>
-                    <div>
-                        <p class="text-center">Quantità </p>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="p-2 border border-dark rounded m-2" @click="removeQuantity(dish.id)"><i class="fa-solid fa-minus"></i></div>
-                            <div>{{ quantity[index].quantity }}</div>
-                            <div class="p-2 border border-dark rounded m-2" @click="addQuantity(dish.id, index)"><i class="fa-solid fa-plus"></i></div>
-                            
-                            <button @click="addToCart(dish.id, quantity[index].quantity, index)" class="ms_btn" :disabled="disableBtn">
-                                <i class="fa-solid fa-cart-plus"></i>
-                            </button>                       
-                        </div>
-                   </div>
-
-                </div>
+        <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index">
+            <div class="dish-img d-flex justify-content-center mt-3">
+                <img class="rounded " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
             </div>
-            
+            <div class="px-3">
+                <p class="text-center px-4 overflow-x-hidden">{{ dish.name }}</p>
+                <p class="text-center">{{ dish.price }}</p>
+                <div>
+                    <p class="text-center">Quantità </p>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="p-2 border border-dark rounded m-2" @click="removeQuantity(dish.id)"><i
+                                class="fa-solid fa-minus"></i></div>
+                        <div>{{ quantity[index].quantity }}</div>
+                        <div class="p-2 border border-dark rounded m-2" @click="addQuantity(dish.id, index)"><i
+                                class="fa-solid fa-plus"></i></div>
+
+                        <button @click="addToCart(dish.id, quantity[index].quantity, index)" class="ms_btn"
+                            :disabled="disableBtn">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    
+
+    </div>
 </template> 
 
 
@@ -74,14 +76,14 @@ export default {
                 }
             })
 
-            cartOrders.forEach(el=> {
+            cartOrders.forEach(el => {
                 let newEl = JSON.parse(el)
-                if(Number(newEl.restaurantId) != this.$route.params.id) { 
+                if (Number(newEl.restaurantId) != this.$route.params.id) {
                     this.disableBtn = true
                     this.quantity[ix].quantity = 0
                 }
             })
-            
+
 
         },
         removeQuantity(id) {
@@ -95,7 +97,7 @@ export default {
         addToCart(id, quantity, ix) {
             let cartOrders = Object.values({ ...localStorage });
 
-            
+
 
             let keys = Object.keys({ ...localStorage })
             let myid = [];
@@ -177,33 +179,38 @@ export default {
 @import '../style/partials/_variables.scss';
 
 
-.dish-box{
+.dish-box {
     border-radius: 30px;
     background: rgb(234, 231, 231);
     transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
-   
-    min-width: 250px;
-        &:hover{
-            transform: scale(1.03);
-            
-        }
-}
-.dish-img{
-            
-            margin-bottom: 30px;
-        aspect-ratio: 1;
-            img{
 
-                overflow: hidden;
-                max-width: 200px;
-                max-height: 200px;
-                width: 100%;
-                &:hover{
-                    transform: scale(1.02);
-                }
-            }
+    min-width: 250px;
+
+    &:hover {
+        transform: scale(1.03);
+
+    }
+}
+
+.dish-img {
+
+    margin-bottom: 30px;
+    aspect-ratio: 1;
+
+    img {
+        object-fit: cover;
+        overflow: hidden;
+        max-width: 200px;
+        height: 200px;
+        width: 100%;
+
+        &:hover {
+            transform: scale(1.02);
         }
-.ms_btn{
+    }
+}
+
+.ms_btn {
     background-color: $bg-secondary;
     color: white;
     padding: 10px;
@@ -211,12 +218,10 @@ export default {
     border: 0px;
     text-decoration: none;
     margin-left: 10px;
-    
+
 }
-.ms_btn:hover{
+
+.ms_btn:hover {
     background-color: $bg-primary;
 }
-
-
-
 </style>

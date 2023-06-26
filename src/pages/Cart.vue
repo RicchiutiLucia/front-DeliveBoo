@@ -3,33 +3,44 @@
 
 
 
-    <div class="d-flex mx-3 flex-wrap gap-3">
-        <div class="card" style="width: 30rem;" v-for="(dish, index) in  dishes " :key="index">
-            <div>
-                <img class="card-img-top h-50" :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ dish.name }}</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's
-                        content.</p>
+    <div class="d-flex mx-3 flex-wrap gap-3 justify-content-center ">
+        <div v-if="dishes.length > 0" class="card ms_card" style="width: 30rem;" v-for="(dish, index) in  dishes "
+            :key="index">
 
-                    <div>
-                        <span>Quantità</span>
-                        <div class="d-flex align-items-center">
-                            <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)"><i
-                                    class="fa-solid fa-minus"></i></div>
-                            <div>{{ order[index].quantity }}</div>
-                            <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)"><i
-                                    class="fa-solid fa-plus"></i></div>
+            <div class="ms_img_container">
+                <img class="card-img-top " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ dish.name }}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's
+                    content.</p>
 
-                        </div>
+                <div>
+                    <span>Quantità</span>
+                    <div class="d-flex align-items-center">
+                        <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)"><i
+                                class="fa-solid fa-minus"></i></div>
+                        <div>{{ order[index].quantity }}</div>
+                        <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)"><i
+                                class="fa-solid fa-plus"></i></div>
 
                     </div>
+
                 </div>
             </div>
 
+
         </div>
-        <div>Totale: {{ sum.toFixed(2) }}</div>
+        <div v-else>
+            <h2>Il Carrello è vuoto</h2>
+        </div>
+        <div class="container">
+            <div v-if="dishes.length > 0">
+                <h2>Totale: {{ sum.toFixed(2) }}</h2>
+            </div>
+
+        </div>
     </div>
 </template>
 <script>
@@ -42,7 +53,7 @@ export default {
             store,
             order: [],
             dishes: [],
-            sum : 0,
+            sum: 0,
             paperino: false
         }
     },
@@ -118,7 +129,7 @@ export default {
                         console.log('dishes2', this.dishes)
                         this.fillOrder()
                         this.dishes = []
-                        
+
                         this.getDishes()
                     }
 
@@ -133,15 +144,15 @@ export default {
         getTotal() {
             console.log(this.dishes);
             this.sum = 0;
-                this.dishes.forEach((el, index) => {
-                    console.log('index', Number(el.price) * Number(this.order[index].quantity));
-                    this.sum +=  Number(el.price) * Number(this.order[index].quantity)
-                    
-                })
-            if(Object.keys({...localStorage}).length === 0) {
+            this.dishes.forEach((el, index) => {
+                console.log('index', Number(el.price) * Number(this.order[index].quantity));
+                this.sum += Number(el.price) * Number(this.order[index].quantity)
+
+            })
+            if (Object.keys({ ...localStorage }).length === 0) {
                 this.store.isEmpty = true
             }
-            
+
         }
 
     },
@@ -158,4 +169,20 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 100%;
+
+
+}
+
+.ms_img_container {
+    max-height: 50%;
+}
+
+.ms_card {
+    max-height: 500px;
+}
+</style>
