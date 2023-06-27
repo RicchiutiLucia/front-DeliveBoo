@@ -104,7 +104,7 @@ export default {
         });
     },
     saveOrder(status) {
-      this.newOrder.total_price = Number(this.amount)
+      this.newOrder.total_price = this.amount
       let cartOrders = Object.values({ ...localStorage });
       let newCartOrders = []
       cartOrders.forEach(element => {
@@ -118,7 +118,12 @@ export default {
        }) */
 
       axios.post(`${this.store.baseUrl}/save-order`, {
-        order: this.newOrder
+        name: this.newOrder.name,
+        address: this.newOrder.address,
+        total_price: this.newOrder.total_price,
+        status: this.newOrder.status,
+        phone: this.newOrder.phone,
+        email: this.newOrder.email
       })
         .then((response) => {
           // Handle the server response
