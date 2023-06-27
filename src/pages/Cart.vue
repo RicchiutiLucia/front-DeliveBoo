@@ -41,13 +41,19 @@
             </div>
 
         </div>
+
+        <Payments :amount="sum.toFixed(2)" ></Payments>
     </div>
 </template>
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import Payments from '../components/Payments.vue';
 export default {
-    name: 'Cart',
+    name: "Cart",
+    components: {
+        Payments
+    },
     data() {
         return {
             store,
@@ -55,117 +61,99 @@ export default {
             dishes: [],
             sum: 0,
             paperino: false
-        }
+        };
     },
     methods: {
         fillOrder() {
             let cartOrders = Object.values({ ...localStorage });
             //console.log(cartOrders)
-
-            this.order = cartOrders.map(element => { return JSON.parse(element) });
-            console.log('ppp', this.order)
+            this.order = cartOrders.map(element => { return JSON.parse(element); });
+            console.log("ppp", this.order);
             this.order = this.order.sort((a, b) => {
-                return a.id - b.id
-            })
-
-
-
-            this.paperino = true
+                return a.id - b.id;
+            });
+            this.paperino = true;
         },
         getDishes() {
             this.order.forEach(element => {
                 axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
-                    console.log('response', response.data.result);
+                    console.log("response", response.data.result);
                     this.dishes.push(response.data.result[0]);
                     this.dishes = this.dishes.sort((a, b) => {
-                        return a.id - b.id
-                    })
-                    this.getTotal()
-                })
+                        return a.id - b.id;
+                    });
+                    this.getTotal();
+                });
             });
         },
-
         addQuantityCart(id) {
             let cartOrders = Object.values({ ...localStorage });
             let cartOrdersKey = Object.keys({ ...localStorage });
-            console.log('cartOrders', cartOrders)
-            console.log('cartOrdersKey', cartOrdersKey)
-            let ordersToChange = cartOrders.map(element => { return JSON.parse(element) });
-            console.log('change', ordersToChange)
+            console.log("cartOrders", cartOrders);
+            console.log("cartOrdersKey", cartOrdersKey);
+            let ordersToChange = cartOrders.map(element => { return JSON.parse(element); });
+            console.log("change", ordersToChange);
             ordersToChange.forEach((element, index) => {
                 if (element.id == id) {
-                    element.quantity++
+                    element.quantity++;
                     localStorage.setItem(`${index + 1}`, JSON.stringify(element));
-                    this.fillOrder()
+                    this.fillOrder();
                 }
-                console.log('order', this.order)
-
-            })
-            this.getTotal()
-
-
+                console.log("order", this.order);
+            });
+            this.getTotal();
         },
         removeQuantityCart(id) {
             let cartOrders = Object.values({ ...localStorage });
             let cartOrdersKey = Object.keys({ ...localStorage });
-
-
-            console.log('cartOrders', cartOrders)
-            console.log('cartOrdersKey', cartOrdersKey)
-            let ordersToChange = cartOrders.map(element => { return JSON.parse(element) });
-            console.log('change', ordersToChange)
+            console.log("cartOrders", cartOrders);
+            console.log("cartOrdersKey", cartOrdersKey);
+            let ordersToChange = cartOrders.map(element => { return JSON.parse(element); });
+            console.log("change", ordersToChange);
             ordersToChange.forEach((element, index) => {
                 if (element.id == id) {
                     //console.log('order', this.order)
                     //console.log('index', index)
                     if (element.quantity > 1) {
-                        element.quantity--
+                        element.quantity--;
                         localStorage.setItem(`${cartOrdersKey[index]}`, JSON.stringify(element));
-                        this.fillOrder()
-                    } else {
-                        localStorage.removeItem(`${cartOrdersKey[index]}`);
-                        console.log('dishes1', this.dishes)
-                        this.dishes.splice(index, 1)
-                        console.log('dishes2', this.dishes)
-                        this.fillOrder()
-                        this.dishes = []
-
-                        this.getDishes()
+                        this.fillOrder();
                     }
-
+                    else {
+                        localStorage.removeItem(`${cartOrdersKey[index]}`);
+                        console.log("dishes1", this.dishes);
+                        this.dishes.splice(index, 1);
+                        console.log("dishes2", this.dishes);
+                        this.fillOrder();
+                        this.dishes = [];
+                        this.getDishes();
+                    }
                 }
-                console.log('order', this.order)
-
-            })
-
-
-            this.getTotal()
+                console.log("order", this.order);
+            });
+            this.getTotal();
         },
         getTotal() {
             console.log(this.dishes);
             this.sum = 0;
             this.dishes.forEach((el, index) => {
-                console.log('index', Number(el.price) * Number(this.order[index].quantity));
-                this.sum += Number(el.price) * Number(this.order[index].quantity)
-
-            })
+                console.log("index", Number(el.price) * Number(this.order[index].quantity));
+                this.sum += Number(el.price) * Number(this.order[index].quantity);
+            });
             if (Object.keys({ ...localStorage }).length === 0) {
-                this.store.isEmpty = true
+                this.store.isEmpty = true;
             }
-
         }
-
     },
-
     mounted() {
         this.fillOrder();
         // console.log(this.order);
         if (this.paperino) {
-            this.getDishes()
+            this.getDishes();
             // console.log(this.dishes)
         }
-
-    }
+    },
+    components: { Payments }
 }
 </script>
 
