@@ -124,10 +124,15 @@ export default {
         status: this.newOrder.status,
         phone: this.newOrder.phone,
         email: this.newOrder.email
+
+
       })
         .then((response) => {
           // Handle the server response
           console.log(response.data);
+          localStorage.clear();
+          this.store.dishes = [];
+          this.store.order = [];
         })
         .catch((error) => {
           console.error(error);

@@ -2,9 +2,13 @@
     <h1 class="text-center mb-3">Menu</h1>
     <div v-show="disableBtn" class="text-center">Non puoi aggiungere un piatto di un'altro ristorante</div>
     <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
-        <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index">
+        <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
             <div class="dish-img d-flex justify-content-center mt-3">
-                <img class="rounded " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
+                <img class="rounded " v-if="dish.image" :src="`http://localhost:8000/storage/${dish.image}`"
+                    alt="Card image cap">
+                <img class="rounded " v-else
+                    src="https://prolococaluso.altervista.org/wp-content/uploads/2013/03/immagine-non-disponibile-3.gif"
+                    alt="Card image cap">
             </div>
             <div class="px-3">
                 <p class="text-center px-4 overflow-x-hidden">{{ dish.name }}</p>
@@ -223,5 +227,4 @@ export default {
 
 .ms_btn:hover {
     background-color: $bg-primary;
-}
-</style>
+}</style>

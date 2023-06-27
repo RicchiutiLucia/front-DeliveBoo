@@ -4,8 +4,8 @@
 
 
     <div class="d-flex mx-3 flex-wrap gap-3 justify-content-center ">
-        <div v-if="dishes.length > 0" class="card ms_card" style="width: 30rem;" v-for="(dish, index) in  dishes "
-            :key="index">
+        <div v-if="store.dishes.length > 0" class="card ms_card" style="width: 30rem;"
+            v-for="(dish, index) in store.dishes " :key="index">
 
             <div class="ms_img_container">
                 <img class="card-img-top " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
@@ -21,7 +21,7 @@
                     <div class="d-flex align-items-center">
                         <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)"><i
                                 class="fa-solid fa-minus"></i></div>
-                        <div>{{ order[index].quantity }}</div>
+                        <div>{{ store.order[index].quantity }}</div>
                         <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)"><i
                                 class="fa-solid fa-plus"></i></div>
 
@@ -36,13 +36,13 @@
             <h2>Il Carrello è vuoto</h2>
         </div>
         <div class="container">
-            <div v-if="dishes.length > 0">
+            <div v-if="store.dishes.length > 0">
                 <h2>Totale: {{ sum.toFixed(2) }}</h2>
             </div>
 
         </div>
 
-        <Payments :amount="sum.toFixed(2)" ></Payments>
+        <Payments :amount="sum.toFixed(2)"></Payments>
     </div>
 </template>
 <script>
@@ -57,8 +57,6 @@ export default {
     data() {
         return {
             store,
-            order: [],
-            dishes: [],
             sum: 0,
             paperino: false
         };
@@ -67,19 +65,19 @@ export default {
         fillOrder() {
             let cartOrders = Object.values({ ...localStorage });
             //console.log(cartOrders)
-            this.order = cartOrders.map(element => { return JSON.parse(element); });
-            console.log("ppp", this.order);
-            this.order = this.order.sort((a, b) => {
+            this.store.order = cartOrders.map(element => { return JSON.parse(element); });
+            console.log("ppp", this.store.order);
+            this.store.order = this.store.order.sort((a, b) => {
                 return a.id - b.id;
             });
             this.paperino = true;
         },
         getDishes() {
-            this.order.forEach(element => {
+            this.store.order.forEach(element => {
                 axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
                     console.log("response", response.data.result);
-                    this.dishes.push(response.data.result[0]);
-                    this.dishes = this.dishes.sort((a, b) => {
+                    this.store.dishes.push(response.data.result[0]);
+                    this.store.dishes = this.store.dishes.sort((a, b) => {
                         return a.id - b.id;
                     });
                     this.getTotal();
@@ -99,7 +97,7 @@ export default {
                     localStorage.setItem(`${index + 1}`, JSON.stringify(element));
                     this.fillOrder();
                 }
-                console.log("order", this.order);
+                console.log("order", this.store.order);
             });
             this.getTotal();
         },
@@ -112,7 +110,7 @@ export default {
             console.log("change", ordersToChange);
             ordersToChange.forEach((element, index) => {
                 if (element.id == id) {
-                    //console.log('order', this.order)
+                    //console.log('order', this.store.order)
                     //console.log('index', index)
                     if (element.quantity > 1) {
                         element.quantity--;
@@ -121,24 +119,24 @@ export default {
                     }
                     else {
                         localStorage.removeItem(`${cartOrdersKey[index]}`);
-                        console.log("dishes1", this.dishes);
-                        this.dishes.splice(index, 1);
-                        console.log("dishes2", this.dishes);
+                        console.log("dishes1", this.store.dishes);
+                        this.store.dishes.splice(index, 1);
+                        console.log("dishes2", this.store.dishes);
                         this.fillOrder();
-                        this.dishes = [];
+                        this.store.dishes = [];
                         this.getDishes();
                     }
                 }
-                console.log("order", this.order);
+                console.log("order", this.store.order);
             });
             this.getTotal();
         },
         getTotal() {
-            console.log(this.dishes);
+            console.log(this.store.dishes);
             this.sum = 0;
-            this.dishes.forEach((el, index) => {
-                console.log("index", Number(el.price) * Number(this.order[index].quantity));
-                this.sum += Number(el.price) * Number(this.order[index].quantity);
+            this.store.dishes.forEach((el, index) => {
+                console.log("index", Number(el.price) * Number(this.store.order[index].quantity));
+                this.sum += Number(el.price) * Number(this.store.order[index].quantity);
             });
             if (Object.keys({ ...localStorage }).length === 0) {
                 this.store.isEmpty = true;
@@ -147,10 +145,10 @@ export default {
     },
     mounted() {
         this.fillOrder();
-        // console.log(this.order);
+        // console.log(this.store.order);
         if (this.paperino) {
             this.getDishes();
-            // console.log(this.dishes)
+            // console.log(this.store.dishes)
         }
     },
     components: { Payments }
