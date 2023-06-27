@@ -1,46 +1,59 @@
 <template>
-
-    <div id="dropin-container"></div>
-    <button @click="submitPayment">Submit Payment</button>
-
+  <input type="text" v-model="newOrder.name">
+  <input type="text" v-model="newOrder.email">
+  <input type="text" v-model="newOrder.phone">
+  <input type="text" v-model="newOrder.address">
+  <div id="dropin-container"></div>
+  <button @click="submitPayment">Submit Payment</button>
+  <div @click=" saveOrder(true)">PROVA</div>
 </template>
   
 <script>
 import axios from 'axios';
 import braintree from 'braintree-web-drop-in';
-import {store} from '../store'
+import { store } from '../store'
 
 export default {
-    props: {
-        amount: Number,
-        items: Array
-    },
+  props: {
+    amount: Number,
+    items: Array
+  },
   data() {
     return {
-        store,
+      store,
       braintreeInstance: null,
       clientToken: '',
-    };
+      newOrder: {
+        name: '',
+        email: '',
+        phone: '',
+        status: false,
+        total_price: 0,
+        address: ''
+
+      }
+    }
   },
   mounted() {
     axios.get(`${this.store.baseUrl}/braintree/client-token`)
       .then(response => {
         this.clientToken = response.data.clientToken;
-       
+
         this.initializeBraintree(this.clientToken);
       })
       .catch(error => {
         console.error(error);
       });
   },
+
   methods: {
     initializeBraintree(clientToken) {
-        console.log(braintree);
+      console.log(braintree);
       braintree.create(
         {
           authorization: clientToken,
           container: '#dropin-container',
-          
+
         },
         (err, instance) => {
           if (err) {
@@ -73,7 +86,39 @@ export default {
       axios.post(`${this.store.baseUrl}/payment/process`, {
         paymentMethodNonce: paymentMethodNonce,
         amount: this.amount,
-        items: [{id: '19', quantity: 23}]
+        items: [{ id: '19', quantity: 23 }]
+      })
+        .then((response) => {
+          // Handle the server response
+          console.log(response.data);
+          this.saveOrder(response.data.status);
+          this.newOrder.name = '';
+          this.newOrder.email = '';
+          this.newOrder.phone = '';
+          this.newOrder.status = false;
+          this.newOrder.total_price = 0;
+          this.newOrder.address = '';
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    saveOrder(status) {
+      this.newOrder.total_price = Number(this.amount)
+      let cartOrders = Object.values({ ...localStorage });
+      let newCartOrders = []
+      cartOrders.forEach(element => {
+        newCartOrders.push(JSON.parse(element))
+      })
+
+      console.log(this.newOrder)
+      /*  newCartOrders.forEach(element => {
+         this.newOrder.dishId.push(element.id)
+         this.newOrder.dishQuantity.push(element.quantity)
+       }) */
+
+      axios.post(`${this.store.baseUrl}/save-order`, {
+        order: this.newOrder
       })
         .then((response) => {
           // Handle the server response
@@ -82,8 +127,8 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-    },
-  },
-};
+    }
+  }
+}
 
 </script>
