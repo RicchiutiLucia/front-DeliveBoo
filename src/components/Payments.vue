@@ -30,8 +30,8 @@ export default {
         status: false,
         total_price: 0,
         address: ''
-
-      }
+      },
+      items: []
     }
   },
   mounted() {
@@ -107,11 +107,15 @@ export default {
       this.newOrder.total_price = this.amount
       let cartOrders = Object.values({ ...localStorage });
       let newCartOrders = []
-      cartOrders.forEach(element => {
+      cartOrders.forEach((element, index) => {
         newCartOrders.push(JSON.parse(element))
+        this.items.push({
+          id: newCartOrders[index].id, 
+          quantity: newCartOrders[index].quantity
+        })
       })
-
-      console.log(this.newOrder)
+      
+      console.log(JSON.stringify(this.items))
       /*  newCartOrders.forEach(element => {
          this.newOrder.dishId.push(element.id)
          this.newOrder.dishQuantity.push(element.quantity)
@@ -123,8 +127,8 @@ export default {
         total_price: this.newOrder.total_price,
         status: this.newOrder.status,
         phone: this.newOrder.phone,
-        email: this.newOrder.email
-
+        email: this.newOrder.email,
+        items: JSON.stringify(this.items)
 
       })
         .then((response) => {
@@ -133,6 +137,7 @@ export default {
           localStorage.clear();
           this.store.dishes = [];
           this.store.order = [];
+          this.items = []
         })
         .catch((error) => {
           console.error(error);
