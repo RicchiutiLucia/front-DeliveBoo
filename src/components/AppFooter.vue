@@ -2,7 +2,7 @@
    <div>
        <div class="bg-footer">
            <div class="container">
-               <div class="row test pt-5 pb-4">
+               <div class="row test py-5">
                    <div class="col">
                        <div class="footer-title">Scopri DeliveBoo</div>
                        <ul class="link-list">

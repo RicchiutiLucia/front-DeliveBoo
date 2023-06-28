@@ -5,7 +5,7 @@
 
 
     <h3 class="text-center my-3">SCEGLI LA CATEGORIA</h3>
-    <div class="container">
+    <div class="container my-3">
         <fieldset class="checkbox-group">
 
             <div class="checkbox" v-for="(category, i) in categories">
@@ -57,7 +57,6 @@
                         <p>{{ restaurant.description }}</p>
                         <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
                                 class="ms_btn">Menú</button></router-link>
-
                     </div>
 
                 </div>
