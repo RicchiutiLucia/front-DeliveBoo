@@ -23,10 +23,10 @@ export default {
                 <div class="col-12 text-center">
                     <div class="row flex-md-nowrap">
                         <div class="col-12 col-md-6">
-                            <img class="img-fluid floating"  :src="images[mainImage]" alt="hero">
+                            <img class="img-fluid floating burger-img"  :src="images[mainImage]" alt="hero">
                         </div>
                         <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center  mb-3 ">
-                            <h1 class="text-center ms_title_font mb-4 text-md-left">IL TUO CIBO PREFERITO DIRETTAMENTE<br>A CASA TUA!</h1>
+                            <h1 class="text-center ms_title_font mb-4 text-md-left text-white">IL TUO CIBO PREFERITO DIRETTAMENTE<br>A CASA TUA!</h1>
                             <a href="#restaurants-list" class="w-50 my-btn">Sfoglia i ristoranti</a>
                         </div>
                     </div>
@@ -53,8 +53,10 @@ section{
    
 }
 
-img{
+.burger-img{
     z-index: 2;
+    width: 400px;
+    height: 360px;
 }
 h2.ms_title_font{
     color: #212121;

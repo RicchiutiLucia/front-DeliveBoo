@@ -35,7 +35,7 @@
 
 
 <template>
-   <section class="py-5 bg-light text-center my-section">
+   <section class="py-5 text-center my-section">
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-6 m-auto">
@@ -45,7 +45,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-lg-3 mt-2" v-for="item in CardItems">
-                <div class="card">
+                <div class="card h-100">
                     <div class="card-body">
                         <span><i :class="item.icon"></i></span>
                         <h5 class="py-2">{{item.title}}</h5>
@@ -67,6 +67,7 @@
 @import '../style/partials/_variables.scss';
 
 .my-section {
+    background-color: whitesmoke;
     h1{
         font-weight: bold;
     }

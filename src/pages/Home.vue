@@ -65,6 +65,7 @@
 
         </div>
     </div>
+    <AppFloat></AppFloat>
     <AppWhyUs></AppWhyUs>
 </template>
 
@@ -73,6 +74,7 @@ import axios from 'axios';
 import { store } from '../store.js'
 import AppJumbo from '../components/AppJumbo.vue';
 import SingleCategoryCard from '../components/SingleCategoryCard.vue';
+import AppFloat from '../components/AppFloat.vue';
 import AppWhyUs from '../components/AppWhyUs.vue';
 
 
@@ -81,6 +83,7 @@ export default {
     components: {
         AppJumbo,
         SingleCategoryCard,
+        AppFloat,
         AppWhyUs
 
     },

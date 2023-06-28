@@ -28,7 +28,7 @@
                        </ul>
                    </div>         
                    <div class="col">
-                       <div class="footer-title">Porta DeliveBoo con te</div>
+                       <div class="footer-title">Scarica DeliveBoo</div>
                        <div class="app-links row col-12 col-md-6">
                            <a href="#"><img src="/app-store.png" alt="" class="w-75 mb-3"></a>
                            <a href="#"><img src="/play-store.png" alt="" class="w-75 "></a>
