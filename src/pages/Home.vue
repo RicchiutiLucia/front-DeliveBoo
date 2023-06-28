@@ -28,9 +28,9 @@
 
             <!-- contenitore usato per spostarsi al click sui ristorante filtarti -->
             <div id="filtered_restaurants"></div>
-            <h1 :class="!checkCategory ? 'd-none' : ''">SELEZIONE ALMENO 1 CATEGORIA</h1>
-
         </div>
+        <h3 class="text-center text-danger" :class="!checkCategory ? 'd-none' : ''">SELEZIONE ALMENO 1 CATEGORIA
+        </h3>
     </div>
 
     <!-- <div v-if="categoriesLoaded" class="category-container" >

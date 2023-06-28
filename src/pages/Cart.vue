@@ -144,6 +144,8 @@ export default {
         }
     },
     mounted() {
+        this.store.order = [];
+        this.store.dishes = [];
         this.fillOrder();
         // console.log(this.store.order);
         if (this.paperino) {
