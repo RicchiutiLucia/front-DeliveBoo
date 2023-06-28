@@ -1,11 +1,15 @@
 <template>
-  <input type="text" v-model="newOrder.name">
-  <input type="text" v-model="newOrder.email">
-  <input type="text" v-model="newOrder.phone">
-  <input type="text" v-model="newOrder.address">
-  <div id="dropin-container"></div>
-  <button @click="submitPayment">Submit Payment</button>
-  <div @click=" saveOrder(true)">PROVA</div>
+ 
+      <input type="text" v-model="newOrder.name">
+    <input type="text" v-model="newOrder.email">
+    <input type="text" v-model="newOrder.phone">
+    <input type="text" v-model="newOrder.address">
+    <div id="dropin-container"></div>
+    <button @click="submitPayment">Submit Payment</button>
+    <div @click=" saveOrder(true)">PROVA</div>
+
+
+  
 </template>
   
 <script>
@@ -86,12 +90,14 @@ export default {
       axios.post(`${this.store.baseUrl}/payment/process`, {
         paymentMethodNonce: paymentMethodNonce,
         amount: this.amount,
-        items: [{ id: '19', quantity: 23 }]
+        
       })
         .then((response) => {
           // Handle the server response
           console.log(response.data);
+          this.sendMail(this.newOrder.name, this.newOrder.email);
           this.saveOrder(response.data.status);
+         
           this.newOrder.name = '';
           this.newOrder.email = '';
           this.newOrder.phone = '';
@@ -132,6 +138,20 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    }, 
+    sendMail(name, email){
+      const payload  = {
+                        name: name,
+                        email: email,
+                        message: 'ciao pippo',
+                    }
+      axios.post(`${this.store.baseUrl}/contacts`, payload)
+      .then(response =>{
+
+        console.log(response);
+
+      })
+
     }
   }
 }
