@@ -174,7 +174,7 @@ export default {
 
 input {
   width: 100%;
-  padding: 2px;
+  padding: 3px;
 }
 
 
