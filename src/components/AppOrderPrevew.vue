@@ -1,11 +1,20 @@
 <template>
     <div class="my-modal position-absolute display-md-none">
-        <ul>
+        
+        <ul v-if="!store.isEmpty">
             <li v-for="(dish, index) in store.dishes" :key="index">
-                {{ dish.name }} - {{ store.order[index].quantity }}
-
+                <div class="d-flex">
+                    <img class="my-img" :src="`http://localhost:8000/storage/${dish.image}`" alt="">
+                    <div>
+                        {{ dish.name }} - {{ store.order[index].quantity }}
+                    </div>
+                </div>
             </li>
+            <div class="btns">
+                <router-link :to="{name: 'cart'}">Carrello</router-link>
+            </div>
         </ul>
+        <div v-else class="text-black">Il carrelo è vuoto</div>
     </div>
 </template>
 <script>
@@ -16,7 +25,8 @@ export default {
     data() {
         return {
             store,
-            paperino: false
+            cart: false,
+            empty: true
         }
     },
     methods: {
@@ -47,18 +57,18 @@ export default {
         this.store.order = [];
         this.store.dishes = [];
         this.fillOrder();
-        if (this.paperino) {
-            this.getDishes();
-            // console.log(this.store.dishes)
-        }
+      
+        this.getDishes();
+        console.log(this.store.dishes)
+       
     }
 }
 
 </script>
 <style lang="scss" scoped>
     .my-modal {
-        
-        top: 30px;
+        width: 230px;
+        top: 20px;
         right: -55px;
         background-color: white;
         padding: 10px;
@@ -68,6 +78,9 @@ export default {
         }
         li {
             color: black;
+        }
+        .my-img {
+            width: 50px;
         }
     }
 </style>

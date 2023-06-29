@@ -164,7 +164,6 @@ export default {
 
 
             this.quantity[ix].quantity = 0
-
             this.store.isEmpty = false
             console.log({ ...localStorage })
         }
