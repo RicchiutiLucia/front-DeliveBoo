@@ -33,17 +33,6 @@
         </h3>
     </div>
 
-    <!-- <div v-if="categoriesLoaded" class="category-container" >
-        <div class="category-card" v-for="(category, i) in categories"><h5>{{ category.name }}</h5> <input class="form-check-input text-center" type="checkbox" value="category.name" id="flexCheckIndeterminate"  @click="selectCategories(category.id)"></div>
-    </div>
-    <div class="d-flex justify-content-center">
-        <button @click="searchCategories(selected)" class=" ms_btn my-3">
-        Cerca Risorante
-        </button>
-
-    </div> -->
-
-
     <div v-if="selectedRestaurants">
         <div class="container mb-5">
             <div class="row g-4 my-2 d-flex justify-content-center flex-wrap">
@@ -208,8 +197,6 @@ export default {
     }
 
 }
-
-
 .restaurant-item {
     box-shadow: 0 0 10px rgb(0, 0, 0.08);
     height: calc(100% - 3px);
@@ -225,9 +212,6 @@ export default {
 .my-img:hover {
     transform: scale(1.1);
 }
-
-
-
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
