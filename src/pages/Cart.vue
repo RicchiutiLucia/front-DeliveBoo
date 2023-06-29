@@ -42,8 +42,8 @@
 
         </div>
 
-        <Payments :amount="sum.toFixed(2)"></Payments>
     </div>
+    <Payments :amount="sum.toFixed(2)"></Payments>
 </template>
 <script>
 import axios from 'axios';

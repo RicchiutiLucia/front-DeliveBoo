@@ -1,15 +1,11 @@
 <template>
- 
-      <input type="text" v-model="newOrder.name">
-    <input type="text" v-model="newOrder.email">
-    <input type="text" v-model="newOrder.phone">
-    <input type="text" v-model="newOrder.address">
-    <div id="dropin-container"></div>
-    <button @click="submitPayment">Submit Payment</button>
-    <div @click=" saveOrder(true)">PROVA</div>
-
-
-  
+  <input type="text" v-model="newOrder.name">
+  <input type="text" v-model="newOrder.email">
+  <input type="text" v-model="newOrder.phone">
+  <input type="text" v-model="newOrder.address">
+  <div id="dropin-container"></div>
+  <button @click="submitPayment">Submit Payment</button>
+  <div @click=" saveOrder(true)">PROVA</div>
 </template>
   
 <script>
@@ -90,14 +86,14 @@ export default {
       axios.post(`${this.store.baseUrl}/payment/process`, {
         paymentMethodNonce: paymentMethodNonce,
         amount: this.amount,
-        
+
       })
         .then((response) => {
           // Handle the server response
           console.log(response.data);
           this.sendMail(this.newOrder.name, this.newOrder.email);
           this.saveOrder(response.data.status);
-         
+
           this.newOrder.name = '';
           this.newOrder.email = '';
           this.newOrder.phone = '';
@@ -116,11 +112,11 @@ export default {
       cartOrders.forEach((element, index) => {
         newCartOrders.push(JSON.parse(element))
         this.items.push({
-          id: newCartOrders[index].id, 
+          id: newCartOrders[index].id,
           quantity: newCartOrders[index].quantity
         })
       })
-      
+
       console.log(JSON.stringify(this.items))
       /*  newCartOrders.forEach(element => {
          this.newOrder.dishId.push(element.id)
@@ -148,22 +144,39 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-    }, 
-    sendMail(name, email){
-      const payload  = {
-                        name: name,
-                        email: email,
-                        message: 'ciao pippo',
-                    }
+    },
+    sendMail(name, email) {
+      const payload = {
+        name: name,
+        email: email,
+        message: 'ciao pippo',
+      }
       axios.post(`${this.store.baseUrl}/contacts`, payload)
-      .then(response =>{
+        .then(response => {
 
-        console.log(response);
+          console.log(response);
 
-      })
+        })
 
     }
   }
 }
 
 </script>
+
+<style scoped>
+.ms-container-left {
+  padding: 20px 0;
+}
+
+input {
+  width: 100%;
+  padding: 2px;
+}
+
+
+.ms-btn {
+  background-color: #FF6B64;
+  color: white;
+}
+</style>
