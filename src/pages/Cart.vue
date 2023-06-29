@@ -143,14 +143,7 @@ export default {
         }
     },
     mounted() {
-        this.store.order = [];
-        this.store.dishes = [];
-        this.fillOrder();
-        // console.log(this.store.order);
-
-        this.getDishes();
-        // console.log(this.store.dishes)
-
+        this.getTotal();
     },
     components: { Payments }
 }
