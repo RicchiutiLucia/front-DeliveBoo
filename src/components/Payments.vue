@@ -164,7 +164,7 @@ export default {
           console.error(error);
         });
     }, 
-    sendMail(name, email){
+    sendMail(name, email, phone, address, total_price){
       const payload  = {
                         name: name,
                         email: email,
