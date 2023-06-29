@@ -165,8 +165,47 @@ export default {
 
             this.quantity[ix].quantity = 0
             this.store.isEmpty = false
-            console.log({ ...localStorage })
-        }
+            /* this.fillOrder()
+           this.getDishes() */
+            let arr = Object.values({...localStorage}).map(el => {return JSON.parse(el)})
+            console.log(arr);
+            this.store.dishes = []
+           arr.forEach(element => {
+                axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
+                    console.log("response", response.data.result);
+                    this.store.dishes.push(response.data.result[0]);
+                    this.store.dishes = this.store.dishes.sort((a, b) => {
+                        return a.id - b.id;
+                    });
+                    
+                });
+            });
+            let ss = Object.values({ ...localStorage });
+            //console.log(cartOrders)
+            this.store.order = ss.map(element => { return JSON.parse(element); });
+            console.log('dishes' ,this.store.order, this.store.dishes)
+        },
+        /* getDishes() {
+            this.store.order.forEach(element => {
+                axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
+                    console.log("response", response.data.result);
+                    this.store.dishes.push(response.data.result[0]);
+                    this.store.dishes = this.store.dishes.sort((a, b) => {
+                        return a.id - b.id;
+                    });
+                    
+                });
+            });
+        },
+        fillOrder() {
+            let cartOrders = Object.values({ ...localStorage });
+            //console.log(cartOrders)
+            this.store.order = cartOrders.map(element => { return JSON.parse(element); });
+            console.log("ppp", this.store.order);
+            this.store.order = this.store.order.sort((a, b) => {
+                return a.id - b.id;
+            });
+        } */
     },
     mounted() {
         //console.log(this.$route.params);

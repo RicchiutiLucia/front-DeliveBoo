@@ -71,6 +71,7 @@ export default {
             this.paperino = true;
         },
         getDishes() {
+            this.store.dishes = []
             this.store.order.forEach(element => {
                 axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
                     console.log("response", response.data.result);
