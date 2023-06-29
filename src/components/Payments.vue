@@ -24,11 +24,10 @@
 
 
 
-  <div class="payment-right h-100 container">
+  <div class="payment-right h-100 container pb-5">
     <div id="dropin-container"></div>
+    <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
   </div>
-
-  <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
 </template>
   
 <script>
@@ -115,7 +114,7 @@ export default {
         .then((response) => {
           // Handle the server response
           console.log(response.data);
-          this.sendMail(this.newOrder.name, this.newOrder.email, this.newOrder.phone,this.newOrder.address,this.amount);
+          this.sendMail(this.newOrder.name, this.newOrder.email, this.newOrder.phone, this.newOrder.address, this.amount);
           this.saveOrder(response.data.status);
 
           this.newOrder.name = '';
@@ -169,15 +168,15 @@ export default {
         .catch((error) => {
           console.error(error);
         });
-    }, 
-    sendMail(name, email, phone, address, total_price){
-      const payload  = {
-                        name: name,
-                        email: email,
-                        phone : phone,
-                        address : address,
-                        total_price : total_price
-                    }
+    },
+    sendMail(name, email, phone, address, total_price) {
+      const payload = {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        total_price: total_price
+      }
       axios.post(`${this.store.baseUrl}/contacts`, payload)
         .then(response => {
 
