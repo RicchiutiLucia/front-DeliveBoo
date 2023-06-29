@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ dish.name }}</h5>
-                <p class="card-text">{{ dish.description }}</p>
+                <p class="card-price">{{ dish.price }}</p>
 
                 <div>
                     <span>Quantità</span>
@@ -167,9 +167,17 @@ img {
 
 .ms_img_container {
     max-height: 50%;
+
 }
 
 .ms_card {
     max-height: 500px;
+
+}
+
+
+
+.card-body {
+    height: 300px;
 }
 </style>
