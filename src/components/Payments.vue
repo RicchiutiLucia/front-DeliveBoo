@@ -1,30 +1,34 @@
 <template>
   <div class="container ">
-
-    <div class="payment-left ">
-      <div class="ms-container-left">
-        <input type="text" v-model="newOrder.name" placeholder="Nome">
-      </div>
-      <div class="ms-container-left">
-        <input type="text" v-model="newOrder.email" placeholder="Email">
-      </div>
-      <div class="ms-container-left">
-        <input type="text" v-model="newOrder.phone" placeholder="Telefono">
-      </div>
-      <div class="ms-container-left">
-        <input type="text" v-model="newOrder.address" placeholder="Indirizzo">
-      </div>
-
+    <div>
+      <label for="name">Nome:</label>
+      <input type="text" id="name" v-model="newOrder.name" required>
+      <div v-if="errors.name" class="error">{{ errors.name }}</div>
     </div>
-    <div class="payment-right h-100">
-      <div id="dropin-container" class=""></div>
+    <div>
+      <label for="address">Indirizzo:</label>
+      <input type="text" id="address" v-model="newOrder.address" required>
+      <div v-if="errors.address" class="error">{{ errors.address }}</div>
     </div>
-
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" v-model="newOrder.email" required>
+      <div v-if="errors.email" class="error">{{ errors.email }}</div>
+    </div>
+    <div>
+      <label for="phone">Numero di cellulare:</label>
+      <input type="tel" id="phone" v-model="newOrder.phone" required>
+      <div v-if="errors.phone" class="error">{{ errors.phone }}</div>
+    </div>
   </div>
-  <div class="container">
-    <button @click="submitPayment" class="btn ms-btn">Submit Payment</button>
 
+
+
+  <div class="payment-right h-100 container">
+    <div id="dropin-container"></div>
   </div>
+
+  <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
 </template>
   
 <script>
@@ -50,7 +54,8 @@ export default {
         total_price: 0,
         address: ''
       },
-      items: []
+      items: [],
+      errors: {}
     }
   },
   mounted() {
@@ -123,6 +128,7 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+
     },
     saveOrder(status) {
       this.newOrder.total_price = this.amount
@@ -179,9 +185,49 @@ export default {
 
         })
 
+    },
+    submitForm() {
+      this.errors = {};
+
+      if (!this.newOrder.name) {
+        this.errors.name = 'Il nome è obbligatorio.';
+      }
+
+      if (!this.newOrder.address) {
+        this.errors.address = 'L\'indirizzo è obbligatorio.';
+      }
+
+      if (!this.newOrder.email) {
+        this.errors.email = 'L\'email è obbligatoria.';
+      } else if (!this.validateEmail(this.newOrder.email)) {
+        this.errors.email = 'Inserisci un\'email valida.';
+      }
+
+      if (!this.newOrder.phone) {
+        this.errors.phone = 'Il numero di cellulare è obbligatorio.';
+      } else if (!this.validatePhone(this.newOrder.phone)) {
+        this.errors.phone = 'Inserisci un numero di cellulare valido.';
+      }
+
+      if (Object.keys(this.errors).length === 0) {
+        // Esegui l'azione desiderata, ad esempio l'invio del form al server
+        // this.submitToServer();
+      }
+    },
+    validateEmail(email) {
+      // Utilizza un'espressione regolare per validare l'email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    },
+    validatePhone(phone) {
+      // Utilizza un'espressione regolare per validare il numero di cellulare
+      const phoneRegex = /^\d{10,15}$/;
+      return phoneRegex.test(phone);
     }
   }
+
 }
+
 
 </script>
 
@@ -199,5 +245,9 @@ input {
 .ms-btn {
   background-color: #FF6B64;
   color: white;
+}
+
+.error {
+  color: red;
 }
 </style>
