@@ -34,14 +34,14 @@
                             <router-link :to="{name: item.routeName}">{{item.label}}</router-link>
                         </li>
                         <li class="nav-item" >
-                            <router-link :to="{name: 'cart'}" @mouseover="store.showModal = true" @mouseleave="store.showModal = false" class="position-relative d-sm-none d-lg-block">
+                            <div  @mouseover="store.showModal = true" @mouseleave="store.showModal = false" class="position-relative d-sm-none d-lg-block">
                                 <i class="fa-solid fa-cart-shopping position-relative">
                                     <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" :class="{'d-none': store.isEmpty }">
                                         <span class="visually-hidden">New alerts</span>
                                     </span>
                                 </i>
                                 <AppOrderPrevew v-show="store.showModal"></AppOrderPrevew>
-                            </router-link>
+                            </div>
                             
                             <router-link :to="{name: 'cart'}" class="d-lg-none">
                                 <i class="fa-solid fa-cart-shopping position-relative">
