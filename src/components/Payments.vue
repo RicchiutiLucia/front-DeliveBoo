@@ -26,7 +26,7 @@
 
   <div class="payment-right h-100 container pb-5">
     <div id="dropin-container"></div>
-    <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
+    <button @click="submitForm(),submitPayment() " class="btn ms-btn">Submit Payment</button>
   </div>
 </template>
   
@@ -92,8 +92,8 @@ export default {
         console.error('Braintree Drop-in is not initialized.');
         return;
       }
-
-      this.braintreeInstance.requestPaymentMethod((err, payload) => {
+      if(Object.keys(this.errors).length == 0) {
+        this.braintreeInstance.requestPaymentMethod((err, payload) => {
         if (err) {
           console.error(err);
           return;
@@ -103,6 +103,8 @@ export default {
         const paymentMethodNonce = payload.nonce;
         this.submitPaymentMethodNonce(paymentMethodNonce);
       });
+      }
+      
     },
     submitPaymentMethodNonce(paymentMethodNonce) {
 
