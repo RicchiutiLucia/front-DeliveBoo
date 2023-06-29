@@ -13,8 +13,9 @@
                             <a href="" class="w-50 my-btn">Ordina</a>
 
                         </div>
-                        <div class="col-12 col-md-6">
-                            <img class="img-fluid floating rider-img"  src="../../public/rider-deliverboo.png" alt="hero">
+                        
+                        <div class="col-12 col-md-6 myImage-container" >
+                            <img class="img-fluid floating rider-img" id="myImage" src="../../public/rider-deliverboo.png" alt="hero">
                         </div>
                     </div>
                 </div>
@@ -62,6 +63,43 @@ svg{
     text-decoration: none;
     color: white;
 }
+
+.myImage-container {
+  overflow: hidden;
+  
+}
+
+@keyframes slideOutRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  25% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+
+
+#myImage {
+  animation: slideOutRight 1.5s forwards;
+}
+
+.myImage-container:hover #myImage {
+  animation:  1s forwards;
+  animation-delay: 0.5s;
+}
+
 </style>
 
 <script>

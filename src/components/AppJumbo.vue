@@ -22,7 +22,7 @@ export default {
             <div class="row">
                 <div class="col-12 text-center">
                     <div class="row flex-md-nowrap">
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 hamburger-container">
                             <img class="img-fluid floating burger-img"  :src="images[mainImage]" alt="hero">
                         </div>
                         <div class="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center  mb-3 ">
@@ -91,5 +91,22 @@ svg{
 .floating{
     animation: float 4s ease-in-out infinite;
 }
+
+h1 {
+  position: relative;
+  animation: fallFromTop 1s ease forwards;
+}
+
+@keyframes fallFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 </style>
