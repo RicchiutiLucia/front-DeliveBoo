@@ -4,7 +4,7 @@
 
 
     <div class="d-flex mx-3 flex-wrap gap-3 justify-content-center ">
-        <div v-if="store.dishes.length > 0" class="card ms_card" style="width: 30rem;"
+        <div v-if="store.dishes.length > 0" class="card ms_card" style="width: 20rem;"
             v-for="(dish, index) in store.dishes " :key="index">
 
             <div class="ms_img_container">
@@ -12,9 +12,7 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ dish.name }}</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's
-                    content.</p>
+                <p class="card-text">{{ dish.description }}</p>
 
                 <div>
                     <span>Quantità</span>
@@ -148,10 +146,10 @@ export default {
         this.store.dishes = [];
         this.fillOrder();
         // console.log(this.store.order);
-        
-            this.getDishes();
-            // console.log(this.store.dishes)
-        
+
+        this.getDishes();
+        // console.log(this.store.dishes)
+
     },
     components: { Payments }
 }
@@ -161,7 +159,7 @@ export default {
 img {
     object-fit: cover;
     overflow: hidden;
-    height: 100%;
+    height: 250px;
 
 
 }
