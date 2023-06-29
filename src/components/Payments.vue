@@ -1,11 +1,30 @@
 <template>
-  <input type="text" v-model="newOrder.name">
-  <input type="text" v-model="newOrder.email">
-  <input type="text" v-model="newOrder.phone">
-  <input type="text" v-model="newOrder.address">
-  <div id="dropin-container"></div>
-  <button @click="submitPayment">Submit Payment</button>
-  <div @click=" saveOrder(true)">PROVA</div>
+  <div class="container ">
+
+    <div class="payment-left ">
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.name" placeholder="Nome">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.email" placeholder="Email">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.phone" placeholder="Telefono">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.address" placeholder="Indirizzo">
+      </div>
+
+    </div>
+    <div class="payment-right h-100">
+      <div id="dropin-container" class=""></div>
+    </div>
+
+  </div>
+  <div class="container">
+    <button @click="submitPayment" class="btn ms-btn">Submit Payment</button>
+
+  </div>
 </template>
   
 <script>
