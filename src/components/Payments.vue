@@ -1,5 +1,5 @@
 <template>
-  <div class="container h-100 ">
+  <div class="container ">
 
     <div class="payment-left ">
       <div class="ms-container-left">
