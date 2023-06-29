@@ -1,11 +1,30 @@
 <template>
-  <input type="text" v-model="newOrder.name">
-  <input type="text" v-model="newOrder.email">
-  <input type="text" v-model="newOrder.phone">
-  <input type="text" v-model="newOrder.address">
-  <div id="dropin-container"></div>
-  <button @click="submitPayment">Submit Payment</button>
-  <div @click=" saveOrder(true)">PROVA</div>
+  <div class="container h-100 ">
+
+    <div class="payment-left ">
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.name" placeholder="Nome">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.email" placeholder="Email">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.phone" placeholder="Telefono">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.address" placeholder="Indirizzo">
+      </div>
+
+    </div>
+    <div class="payment-right h-100">
+      <div id="dropin-container" class=""></div>
+    </div>
+
+  </div>
+  <div class="container">
+    <button @click="submitPayment" class="btn ms-btn">Submit Payment</button>
+
+  </div>
 </template>
   
 <script>
@@ -110,11 +129,11 @@ export default {
       cartOrders.forEach((element, index) => {
         newCartOrders.push(JSON.parse(element))
         this.items.push({
-          id: newCartOrders[index].id, 
+          id: newCartOrders[index].id,
           quantity: newCartOrders[index].quantity
         })
       })
-      
+
       console.log(JSON.stringify(this.items))
       /*  newCartOrders.forEach(element => {
          this.newOrder.dishId.push(element.id)
@@ -147,3 +166,20 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.ms-container-left {
+  padding: 20px 0;
+}
+
+input {
+  width: 100%;
+  padding: 2px;
+}
+
+
+.ms-btn {
+  background-color: #FF6B64;
+  color: white;
+}
+</style>
