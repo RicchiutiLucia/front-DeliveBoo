@@ -1,15 +1,30 @@
 <template>
- 
-      <input type="text" v-model="newOrder.name">
-    <input type="text" v-model="newOrder.email">
-    <input type="text" v-model="newOrder.phone">
-    <input type="text" v-model="newOrder.address">
-    <div id="dropin-container"></div>
-    <button @click="submitPayment">Submit Payment</button>
-    <div @click=" saveOrder(true)">PROVA</div>
+  <div class="container ">
 
+    <div class="payment-left ">
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.name" placeholder="Nome">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.email" placeholder="Email">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.phone" placeholder="Telefono">
+      </div>
+      <div class="ms-container-left">
+        <input type="text" v-model="newOrder.address" placeholder="Indirizzo">
+      </div>
 
-  
+    </div>
+    <div class="payment-right h-100">
+      <div id="dropin-container" class=""></div>
+    </div>
+
+  </div>
+  <div class="container">
+    <button @click="submitPayment" class="btn ms-btn">Submit Payment</button>
+
+  </div>
 </template>
   
 <script>
@@ -90,14 +105,14 @@ export default {
       axios.post(`${this.store.baseUrl}/payment/process`, {
         paymentMethodNonce: paymentMethodNonce,
         amount: this.amount,
-        
+
       })
         .then((response) => {
           // Handle the server response
           console.log(response.data);
           this.sendMail(this.newOrder.name, this.newOrder.email, this.newOrder.phone,this.newOrder.address,this.amount);
           this.saveOrder(response.data.status);
-         
+
           this.newOrder.name = '';
           this.newOrder.email = '';
           this.newOrder.phone = '';
@@ -116,11 +131,11 @@ export default {
       cartOrders.forEach((element, index) => {
         newCartOrders.push(JSON.parse(element))
         this.items.push({
-          id: newCartOrders[index].id, 
+          id: newCartOrders[index].id,
           quantity: newCartOrders[index].quantity
         })
       })
-      
+
       console.log(JSON.stringify(this.items))
       /*  newCartOrders.forEach(element => {
          this.newOrder.dishId.push(element.id)
@@ -149,7 +164,7 @@ export default {
           console.error(error);
         });
     }, 
-    sendMail(name, email,phone,address,total_price){
+    sendMail(name, email){
       const payload  = {
                         name: name,
                         email: email,
@@ -158,14 +173,31 @@ export default {
                         total_price : total_price
                     }
       axios.post(`${this.store.baseUrl}/contacts`, payload)
-      .then(response =>{
+        .then(response => {
 
-        console.log(response);
+          console.log(response);
 
-      })
+        })
 
     }
   }
 }
 
 </script>
+
+<style scoped>
+.ms-container-left {
+  padding: 20px 0;
+}
+
+input {
+  width: 100%;
+  padding: 3px;
+}
+
+
+.ms-btn {
+  background-color: #FF6B64;
+  color: white;
+}
+</style>
