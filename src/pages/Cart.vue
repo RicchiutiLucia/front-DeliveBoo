@@ -148,10 +148,10 @@ export default {
         this.store.dishes = [];
         this.fillOrder();
         // console.log(this.store.order);
-        if (this.paperino) {
+        
             this.getDishes();
             // console.log(this.store.dishes)
-        }
+        
     },
     components: { Payments }
 }

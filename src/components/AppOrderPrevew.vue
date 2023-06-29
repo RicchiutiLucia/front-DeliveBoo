@@ -1,5 +1,5 @@
 <template>
-    <div class="pippo">
+    <div class="my-modal position-absolute display-md-none">
         <ul>
             <li v-for="(dish, index) in store.dishes" :key="index">
                 {{ dish.name }} - {{ store.order[index].quantity }}
@@ -56,7 +56,18 @@ export default {
 
 </script>
 <style lang="scss" scoped>
-.pippo {
-    margin: 200px;
-}
+    .my-modal {
+        
+        top: 30px;
+        right: -55px;
+        background-color: white;
+        padding: 10px;
+        border: 1px solid black;
+        ul {
+            list-style: none;
+        }
+        li {
+            color: black;
+        }
+    }
 </style>

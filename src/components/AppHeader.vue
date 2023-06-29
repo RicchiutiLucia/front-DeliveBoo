@@ -34,11 +34,24 @@
                             <router-link :to="{name: item.routeName}">{{item.label}}</router-link>
                         </li>
                         <li class="nav-item" >
-                            <i class="fa-solid fa-cart-shopping position-relative">
-                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" :class="{'d-none': store.isEmpty }">
-                            <span class="visually-hidden">New alerts</span>
-                        </span>
-                            </i>
+                            <router-link :to="{name: 'cart'}" @mouseover="store.showModal = true" @mouseleave="store.showModal = false" class="position-relative d-sm-none d-lg-block">
+                                <i class="fa-solid fa-cart-shopping position-relative">
+                                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" :class="{'d-none': store.isEmpty }">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                </i>
+                                <AppOrderPrevew v-show="store.showModal"></AppOrderPrevew>
+                            </router-link>
+                            
+                            <router-link :to="{name: 'cart'}" class="d-lg-none">
+                                <i class="fa-solid fa-cart-shopping position-relative">
+                                    <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle" :class="{'d-none': store.isEmpty }">
+                                        <span class="visually-hidden">New alerts</span>
+                                    </span>
+                                </i>
+ 
+                            </router-link>
+                            
                         </li>
                     </ul>          
                 </div>
@@ -51,11 +64,6 @@
 <style scoped lang="scss">
 @use '../style/general.scss';
 @import '../style/partials/_variables.scss';
-
-
-
- 
-  
 
      nav{
 
@@ -103,8 +111,12 @@
 
 <script>
 import {store} from '../store'
+import AppOrderPrevew from './AppOrderPrevew.vue';
        export default {
         name: "AppHeader",
+        components: {
+            AppOrderPrevew
+        },
         data() {
             return {
                 store,
@@ -113,11 +125,7 @@ import {store} from '../store'
                         label: 'Home',
                         routeName: 'home'
                     },
-                    {
-                        label: 'Carrello',
-                        routeName: 'cart'
-                    },
-                   
+           
                 ],
                 isEmpty: Object.keys({...localStorage }).length == 0
             }
