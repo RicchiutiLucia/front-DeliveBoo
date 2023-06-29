@@ -95,7 +95,7 @@ export default {
         .then((response) => {
           // Handle the server response
           console.log(response.data);
-          this.sendMail(this.newOrder.name, this.newOrder.email);
+          this.sendMail(this.newOrder.name, this.newOrder.email, this.newOrder.phone,this.newOrder.address,this.amount);
           this.saveOrder(response.data.status);
          
           this.newOrder.name = '';
@@ -149,11 +149,13 @@ export default {
           console.error(error);
         });
     }, 
-    sendMail(name, email){
+    sendMail(name, email,phone,address,total_price){
       const payload  = {
                         name: name,
                         email: email,
-                        message: 'ciao pippo',
+                        phone : phone,
+                        address : address,
+                        total_price : total_price
                     }
       axios.post(`${this.store.baseUrl}/contacts`, payload)
       .then(response =>{
