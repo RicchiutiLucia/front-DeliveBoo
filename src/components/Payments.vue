@@ -1,31 +1,42 @@
 <template>
-  <div class="ms-payment container px-3">
-    <div class="container">
-      <div>
-        <label for="name">Nome:</label>
-        <input type="text" id="name" v-model="newOrder.name" required>
-        <div v-if="errors.name" class="error">{{ errors.name }}</div>
+  <div class="ms-payment container">
+
+    <div class="ms-info p-2">
+      <div class="ms-insert-data">
+        <p>Inserisci i tuoi dati</p>
       </div>
-      <div>
-        <label for="address">Indirizzo:</label>
-        <input type="text" id="address" v-model="newOrder.address" required>
-        <div v-if="errors.address" class="error">{{ errors.address }}</div>
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="ms-label col=12 col-lg-6">
+            <label for="name" class="ms-name-label">Nome:</label>
+            <input type="text" id="name" v-model="newOrder.name" required>
+            <div v-if="errors.name" class="error">{{ errors.name }}</div>
+          </div>
+          <div class="ms-label col=12 col-lg-6">
+            <label for=" address">Indirizzo:</label>
+            <input type="text" id="address" v-model="newOrder.address" required>
+            <div v-if="errors.address" class="error">{{ errors.address }}</div>
+          </div>
+          <div class="ms-label col=12 col-lg-6">
+            <label class="ms-email-label" for="email">Email:</label>
+            <input type="email" id="email" v-model="newOrder.email" required>
+            <div v-if="errors.email" class="error">{{ errors.email }}</div>
+          </div>
+          <div class="ms-label col=12 col-lg-6">
+            <label for="phone">Cellulare:</label>
+            <input type="tel" id="phone" v-model="newOrder.phone" required>
+            <div v-if="errors.phone" class="error">{{ errors.phone }}</div>
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" v-model="newOrder.email" required>
-        <div v-if="errors.email" class="error">{{ errors.email }}</div>
-      </div>
-      <div>
-        <label for="phone">Numero di cellulare:</label>
-        <input type="tel" id="phone" v-model="newOrder.phone" required>
-        <div v-if="errors.phone" class="error">{{ errors.phone }}</div>
-      </div>
+
     </div>
 
 
 
-    <div class="payment-right h-100 container pb-5">
+
+    <div class="payment-right h-100 container pb-3">
       <div id="dropin-container"></div>
       <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
     </div>
@@ -236,19 +247,26 @@ export default {
 @use '../style/general.scss';
 @import '../style/partials/_variables.scss';
 
-.ms-container-left {
-  padding: 20px 0;
-}
 
 input {
-  width: 100%;
+  width: 260px;
   padding: 3px;
+  margin-left: 15px;
+
+  .ms-email-input {
+    margin-left: 20px;
+  }
 }
 
 
 .ms-btn {
   background-color: $bg-primary;
   color: white;
+  margin-top: 10px;
+
+  &:hover {
+    border: 2px solid $bg-secondary;
+  }
 }
 
 .error {
@@ -261,5 +279,33 @@ input {
   margin: 30px auto;
   padding-top: 10px;
 
+}
+
+.ms-info {
+  background-color: white;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 5px;
+  margin: 13px 12px -34px;
+
+}
+
+.ms-insert-data {
+  border-bottom: 1px solid rgb(186, 186, 186);
+  margin-left: -8px;
+  margin-right: -8px;
+  padding: 10px 8px 0;
+}
+
+.ms-label {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ms-email-label {
+  margin-right: 23px;
+}
+
+.ms-name-label {
+  margin-right: 18px;
 }
 </style>
