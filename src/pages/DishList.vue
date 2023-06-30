@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-center mb-3">Menu</h1>
-    <div v-show="disableBtn" class="text-center">Non puoi aggiungere un piatto di un'altro ristorante</div>
+
     <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
         <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
             <div class="dish-img d-flex justify-content-center mt-3">
@@ -33,6 +33,10 @@
         </div>
 
     </div>
+    <h2 v-if="disableBtn" class="text-center text-danger ms-shake-error">Non puoi aggiungere un piatto di un'altro
+        ristorante, prima
+        effettua
+        l'ordine o svuota il carrello!</h2>
 </template> 
 
 
@@ -167,23 +171,23 @@ export default {
             this.store.isEmpty = false
             /* this.fillOrder()
            this.getDishes() */
-            let arr = Object.values({...localStorage}).map(el => {return JSON.parse(el)})
+            let arr = Object.values({ ...localStorage }).map(el => { return JSON.parse(el) })
             console.log(arr);
             this.store.dishes = []
-           arr.forEach(element => {
+            arr.forEach(element => {
                 axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
                     console.log("response", response.data.result);
                     this.store.dishes.push(response.data.result[0]);
                     this.store.dishes = this.store.dishes.sort((a, b) => {
                         return a.id - b.id;
                     });
-                    
+
                 });
             });
             let ss = Object.values({ ...localStorage });
             //console.log(cartOrders)
             this.store.order = ss.map(element => { return JSON.parse(element); });
-            console.log('dishes' ,this.store.order, this.store.dishes)
+            console.log('dishes', this.store.order, this.store.dishes)
         },
         /* getDishes() {
             this.store.order.forEach(element => {
@@ -265,4 +269,30 @@ export default {
 
 .ms_btn:hover {
     background-color: $bg-primary;
-}</style>
+}
+
+.ms-shake-error {
+
+    width: 90vw;
+    margin: auto;
+    animation: shake 0.2s ease-in-out 0s 2;
+}
+
+@keyframes shake {
+    0% {
+        margin-left: 0rem;
+    }
+
+    25% {
+        margin-left: 0.5rem;
+    }
+
+    75% {
+        margin-left: -0.5rem;
+    }
+
+    100% {
+        margin-left: 0rem;
+    }
+}
+</style>

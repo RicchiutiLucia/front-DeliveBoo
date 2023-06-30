@@ -1,32 +1,34 @@
 <template>
-  <div class="container ">
-    <div>
-      <label for="name">Nome:</label>
-      <input type="text" id="name" v-model="newOrder.name" required>
-      <div v-if="errors.name" class="error">{{ errors.name }}</div>
+  <div class="ms-payment container px-3">
+    <div class="container">
+      <div>
+        <label for="name">Nome:</label>
+        <input type="text" id="name" v-model="newOrder.name" required>
+        <div v-if="errors.name" class="error">{{ errors.name }}</div>
+      </div>
+      <div>
+        <label for="address">Indirizzo:</label>
+        <input type="text" id="address" v-model="newOrder.address" required>
+        <div v-if="errors.address" class="error">{{ errors.address }}</div>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" v-model="newOrder.email" required>
+        <div v-if="errors.email" class="error">{{ errors.email }}</div>
+      </div>
+      <div>
+        <label for="phone">Numero di cellulare:</label>
+        <input type="tel" id="phone" v-model="newOrder.phone" required>
+        <div v-if="errors.phone" class="error">{{ errors.phone }}</div>
+      </div>
     </div>
-    <div>
-      <label for="address">Indirizzo:</label>
-      <input type="text" id="address" v-model="newOrder.address" required>
-      <div v-if="errors.address" class="error">{{ errors.address }}</div>
-    </div>
-    <div>
-      <label for="email">Email:</label>
-      <input type="email" id="email" v-model="newOrder.email" required>
-      <div v-if="errors.email" class="error">{{ errors.email }}</div>
-    </div>
-    <div>
-      <label for="phone">Numero di cellulare:</label>
-      <input type="tel" id="phone" v-model="newOrder.phone" required>
-      <div v-if="errors.phone" class="error">{{ errors.phone }}</div>
-    </div>
-  </div>
 
 
 
-  <div class="payment-right h-100 container pb-5">
-    <div id="dropin-container"></div>
-    <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
+    <div class="payment-right h-100 container pb-5">
+      <div id="dropin-container"></div>
+      <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
+    </div>
   </div>
 </template>
   
@@ -230,7 +232,10 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss" >
+@use '../style/general.scss';
+@import '../style/partials/_variables.scss';
+
 .ms-container-left {
   padding: 20px 0;
 }
@@ -242,11 +247,19 @@ input {
 
 
 .ms-btn {
-  background-color: #FF6B64;
+  background-color: $bg-primary;
   color: white;
 }
 
 .error {
   color: red;
+}
+
+.ms-payment {
+  border: 2px solid $bg-secondary;
+  border-radius: 5px;
+  margin: 30px auto;
+  padding-top: 10px;
+
 }
 </style>
