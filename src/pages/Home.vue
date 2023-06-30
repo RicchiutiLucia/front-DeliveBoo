@@ -55,9 +55,9 @@
         </div>
     </div>
     <AppFloat></AppFloat>
-    <div class="col-12 d-flex justify-content-center">
+    
         <Carousel></Carousel>
-    </div>
+    
     
     <AppWhyUs></AppWhyUs>
 </template>
