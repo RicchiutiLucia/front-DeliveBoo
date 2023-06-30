@@ -23,7 +23,6 @@ export default {
 
 <template>
     <AppHeader></AppHeader>
- 
     <router-view></router-view>
     <AppFooter></AppFooter>
 </template>

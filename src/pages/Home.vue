@@ -6,6 +6,7 @@
 
     <h3 class="text-center my-3">SCEGLI LA CATEGORIA</h3>
     <div class="container my-3">
+
         <fieldset class="checkbox-group">
 
             <div class="checkbox" v-for="(category, i) in categories">
@@ -54,6 +55,10 @@
         </div>
     </div>
     <AppFloat></AppFloat>
+    <div class="col-12 d-flex justify-content-center">
+        <Carousel></Carousel>
+    </div>
+    
     <AppWhyUs></AppWhyUs>
 </template>
 
@@ -64,17 +69,17 @@ import AppJumbo from '../components/AppJumbo.vue';
 import SingleCategoryCard from '../components/SingleCategoryCard.vue';
 import AppFloat from '../components/AppFloat.vue';
 import AppWhyUs from '../components/AppWhyUs.vue';
-
+import Carousel from '../components/Carousel.vue';
 
 export default {
     name: 'Home',
     components: {
-        AppJumbo,
-        SingleCategoryCard,
-        AppFloat,
-        AppWhyUs
-
-    },
+    AppJumbo,
+    SingleCategoryCard,
+    AppFloat,
+    AppWhyUs,
+    Carousel
+},
     data() {
 
 
