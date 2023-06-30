@@ -39,8 +39,9 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-6 m-auto">
-                <h1>Why Us</h1>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate, veritatis</p>
+                <h3>I NOSTRI SERVIZI </h3>
+                <p>Deliverboo ti permette di scegliere tra migliaia di piatti dei ristoranti della tua città</p>
+              
             </div>
         </div>
         <div class="row mt-3">

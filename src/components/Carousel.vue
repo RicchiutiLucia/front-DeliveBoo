@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="text-center py-4">I ristoranti consigliati</h1>
+        <h3 class="text-center py-4">I RISTORANTI CONSIGLIATI</h3>
         <div class=" d-flex flex-wrap justify-content-center">
             
             <div class="restaurant-card m-4"  v-for="restaurant in randomRestaurants">
@@ -10,6 +10,14 @@
                 <div class="text-center pt-2">
                     <span class="fw-bold">{{ restaurant.name }}</span>
                 </div>
+                <!-- Button per la rotta per il menu del ristorante
+                    
+                    <div class="d-flex justify-content-center my-2 sci">
+                    <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
+                        <button class="btn btn-warning">Menú</button>
+                    </router-link>
+
+                </div> -->
             
             </div>
             
@@ -46,16 +54,9 @@
         transition: transform 250ms;
         margin: 0 10px;
         &:hover {
-          transform: translateY(-5px);
-         
+          transform: translateY(-10px);
+	      opacity: 1;
         }}
-          
-                     
-  
-            
-          
-
-
 
 </style>
 
@@ -91,6 +92,7 @@
                
             }
         },
+        
         created() {
             axios.get(`${this.store.baseUrl}/restaurants`).then(response => {
                 this.restaurants = response.data.result

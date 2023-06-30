@@ -80,7 +80,8 @@ nav {
     z-index: 1000;
 
     .my-logo {
-        max-height: 70px;
+        height: 70px;
+        width: 70px;
         cursor: pointer;
     }
 

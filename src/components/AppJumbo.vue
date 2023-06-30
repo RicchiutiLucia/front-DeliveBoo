@@ -55,8 +55,8 @@ section{
 
 .burger-img{
     z-index: 2;
-    width: 400px;
-    height: 360px;
+    width: 300px;
+    height: 300px;
 }
 h2.ms_title_font{
     color: #212121;
