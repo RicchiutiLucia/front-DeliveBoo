@@ -24,7 +24,7 @@
         </fieldset>
         <div class="d-flex justify-content-center">
             <button @click="searchCategories(selected)" class=" ms_btn my-3">
-                <a href="#filtered_restaurants" class="ms_link_restaurants">Cerca Risorante</a>
+                <a href="#filtered_restaurants" class="ms_link_restaurants">Cerca Ristorante</a>
             </button>
 
             <!-- contenitore usato per spostarsi al click sui ristorante filtarti -->
