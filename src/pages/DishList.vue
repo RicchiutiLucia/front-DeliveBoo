@@ -1,8 +1,34 @@
 <template>
     <h1 class="text-center mb-3">Menu</h1>
 
+
     <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
-        <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
+        <div class="my-card" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true"> 
+            <div class="item-image container mt-1"> 
+                <img :src="`http://localhost:8000/storage/${dish.image}`"> 
+            </div> 
+            <div class="item-content p-1 d-flex justify-content-center flex-wrap"> 
+                <div class="text-center">
+                    <h3>{{ dish.name }}</h3> 
+                    <h4> <strong>Prezzo:</strong> {{ dish.price }} $</h4> 
+                </div>
+                <div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="p-2 border border-dark rounded m-2" @click="removeQuantity(dish.id)"><i
+                                class="fa-solid fa-minus"></i></div>
+                        <div>{{ quantity[index].quantity }}</div>
+                        <div class="p-2 border border-dark rounded m-2" @click="addQuantity(dish.id, index)"><i
+                                class="fa-solid fa-plus"></i></div>
+
+                        <button @click="addToCart(dish.id, quantity[index].quantity, index)" class="ms_btn"
+                            :disabled="disableBtn">
+                            <i class="fa-solid fa-cart-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
             <div class="dish-img d-flex justify-content-center mt-3">
                 <img class="rounded " v-if="dish.image" :src="`http://localhost:8000/storage/${dish.image}`"
                     alt="Card image cap">
@@ -30,7 +56,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
 
     </div>
     <h2 v-if="disableBtn" class="text-center text-danger ms-shake-error">Non puoi aggiungere un piatto di un'altro
@@ -225,36 +251,75 @@ export default {
 @import '../style/partials/_variables.scss';
 
 
-.dish-box {
-    border-radius: 30px;
-    background: rgb(234, 231, 231);
-    transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
-
-    min-width: 250px;
-
-    &:hover {
-        transform: scale(1.03);
-
-    }
-}
-
-.dish-img {
-
-    margin-bottom: 30px;
-    aspect-ratio: 1;
-
-    img {
-        object-fit: cover;
-        overflow: hidden;
-        max-width: 200px;
-        height: 200px;
-        width: 100%;
-
-        &:hover {
-            transform: scale(1.02);
+.my-card {
+    height: 310px;
+    width: 250px;
+    background-color: #fffbfb;
+    border-radius: 20px;
+    position: relative;
+     &:hover {
+             transform: scale(1.03);
         }
-    }
 }
+.my-card .item-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px
+}
+
+.my-card .item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+
+
+.item-content h3 {
+    font-size: 20px;
+    height: 45px
+    
+}
+
+.item-content h4 {
+    font-size: 15px;
+    font-weight: 500
+}
+
+
+
+// .dish-box {
+//     border-radius: 30px;
+//     background: rgb(234, 231, 231);
+//     transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
+
+//     min-width: 250px;
+
+//     &:hover {
+//         transform: scale(1.03);
+
+//     }
+// }
+
+// .dish-img {
+
+//     margin-bottom: 30px;
+//     aspect-ratio: 1;
+
+//     img {
+//         object-fit: cover;
+//         overflow: hidden;
+//         max-width: 200px;
+//         height: 200px;
+//         width: 100%;
+
+//         &:hover {
+//             transform: scale(1.02);
+//         }
+//     }
+// }
 
 .ms_btn {
     background-color: $bg-secondary;

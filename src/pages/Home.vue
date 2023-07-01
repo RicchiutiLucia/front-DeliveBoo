@@ -35,23 +35,23 @@
     </div>
 
     <div v-if="selectedRestaurants">
-        <div class="container mb-5">
-            <div class="row g-4 my-2 d-flex justify-content-center flex-wrap">
-                <h3 class="text-center">RISTORANTI</h3>
-                <div class="col-lg-3 col-md-6" v-for="(restaurant, index) in  restaurants " :key="index">
-                    <div class="restaurant-item text-center">
-                        <div class="my-3">
-                            <img class="img-fluid my-img pt-2" :src="restaurant.image" alt="Card image cap">
-                        </div>
-                        <h3>{{ restaurant.name }}</h3>
-                        <p>{{ restaurant.description }}</p>
-                        <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
-                                class="ms_btn">Menú</button></router-link>
-                    </div>
-
+        <h3 class="text-center">RISTORANTI</h3>
+        <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
+            
+            <div class="my-card" v-for="(restaurant, index) in restaurants" :key="index"> 
+            <div class="item-image container mt-1"> 
+                <img :src="restaurant.image"> 
+            </div> 
+            <div class="item-content p-1"> 
+                <div class="text-center">
+                    <h3>{{ restaurant.name }}</h3> 
+                    <h4> <strong>Categorie: </strong></h4> 
+                </div>
+                <div>
+                    
                 </div>
             </div>
-
+        </div>
         </div>
     </div>
     <AppFloat></AppFloat>
@@ -181,14 +181,6 @@ export default {
 
 }
 
-.ms_btn {
-    background-color: $bg-primary;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-
-}
-
 
 .ms_btn {
     background-color: $bg-primary;
@@ -201,21 +193,6 @@ export default {
         background-color: $bg-secondary;
     }
 
-}
-.restaurant-item {
-    box-shadow: 0 0 10px rgb(0, 0, 0.08);
-    height: calc(100% - 3px);
-    transition: 0.5s;
-}
-
-.my-img {
-    border-radius: 10px;
-    transition: 0.5s;
-    max-width: 90%;
-}
-
-.my-img:hover {
-    transform: scale(1.1);
 }
 .checkbox-group {
     display: flex;
@@ -231,9 +208,6 @@ export default {
         margin: .5rem 0.5rem;
     }
 }
-
-
-
 .checkbox-group-legend {
     font-size: 1.5rem;
     font-weight: 700;
@@ -344,5 +318,42 @@ export default {
 .ms_link_restaurants {
     text-decoration: none;
     color: white;
+}
+
+.my-card {
+    height: 310px;
+    width: 250px;
+    background-color: #fffbfb;
+    border-radius: 20px;
+    position: relative;
+     &:hover {
+             transform: scale(1.03);
+        }
+}
+.my-card .item-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px
+}
+
+.my-card .item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
+}
+
+
+
+.item-content h3 {
+    font-size: 20px;
+    height: 45px
+    
+}
+
+.item-content h4 {
+    font-size: 15px;
+    font-weight: 500
 }
 </style>

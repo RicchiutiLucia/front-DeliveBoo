@@ -12,7 +12,7 @@
                 </div>
               
                     
-                <div class="d-flex justify-content-center my-2 sci">
+                <div class="d-flex justify-content-center my-2">
                     <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
                         <button class="btn btn-warning">Menú</button>
                     </router-link>
@@ -56,6 +56,7 @@
         &:hover {
           transform: translateY(-10px);
 	      opacity: 1;
+          
         }}
 
 </style>
