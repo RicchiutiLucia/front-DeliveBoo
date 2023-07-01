@@ -346,6 +346,7 @@ export default {
     position: relative;
      &:hover {
              transform: scale(1.03);
+             border: 1px solid $bg-secondary;
         }
 }
 .my-card .item-image {
