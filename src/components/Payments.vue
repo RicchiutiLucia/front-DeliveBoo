@@ -188,7 +188,8 @@ export default {
         email: email,
         phone: phone,
         address: address,
-        total_price: total_price
+        total_price: total_price,
+        dishes: JSON.stringify(this.store.dishes)
       }
       axios.post(`${this.store.baseUrl}/contacts`, payload)
         .then(response => {
@@ -196,7 +197,7 @@ export default {
           console.log(response);
 
         })
-
+        
     },
     submitForm() {
       this.errors = {};
