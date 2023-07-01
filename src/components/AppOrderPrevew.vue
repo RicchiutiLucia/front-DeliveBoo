@@ -1,33 +1,43 @@
 <template>
     <div class="my-modal position-absolute display-md-none">
         <div>
-
+ 
+            
             <div v-if="!store.isEmpty">
+                <h5 class="text-bold p-1">Il tuo carrello</h5>  
+                <hr class="m-0">
                 <ul>
-                    <li v-for="(dish, index) in store.dishes" :key="index" class="my-2">
-                        <div class="d-flex align-items-center">
-                            <div class="my-img-wrapper d-flex justify-content-center">
-                                <img class="my-img" :src="`http://localhost:8000/storage/${dish.image}`" alt="">
-                            </div>
-                            <div class="ms-2">
-                                <div>
-                                    {{ dish.name }}
-                                </div>
-                                <div>
-                                    Quantità - {{ store.order[index].quantity }}
-                                </div>
-                            </div>
+                    <li v-for="(dish, index) in store.dishes" :key="index" class="py-2 d-flex align-items-center">
 
+                        <div class="my-img-wrapper d-flex justify-content-center">
+                            <img class="my-img" :src="`http://localhost:8000/storage/${dish.image}`" alt="">
                         </div>
+                        <div class="ms-2">
+                            <div>
+                                {{ dish.name }}
+                            </div>
+                            <div>
+                                Quantità - {{ store.order[index].quantity }}
+                            </div>
+                            <div>
+                                Prezzo - {{ dish.price }}€
+                            </div>
+                        </div>
+
                     </li>
                 </ul>
+                <hr class="m-0">
+                <div class="d-flex justify-content-between p-2">
+                    <span class="text-bold">Totale:</span>
+                    <h6>{{ this.sum.toFixed(2) }} €</h6>
+                </div>
                 <div class="my-3 container-fluid text-center">
                     <router-link :to="{ name: 'cart' }" class="text-white my-btn text-center">Carrello e
                         check-out</router-link>
                 </div>
 
             </div>
-            <div v-else class="text-black">Nessun elemento nel carrello!</div>
+            <div v-else class="text-black px-2 py-3 text-center">Nessun elemento nel carrello!</div>
         </div>
     </div>
 </template>
@@ -40,7 +50,8 @@ export default {
         return {
             store,
             cart: false,
-            empty: true
+            empty: true,
+            sum: 0
         }
     },
     methods: {
@@ -55,13 +66,14 @@ export default {
             this.paperino = true;
         },
         getDishes() {
-            this.store.order.forEach(element => {
+            this.store.order.forEach((element, index) => {
                 axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
                     console.log("response", response.data.result);
                     this.store.dishes.push(response.data.result[0]);
                     this.store.dishes = this.store.dishes.sort((a, b) => {
                         return a.id - b.id;
                     });
+                    this.sum += (this.store.order[index].quantity * this.store.dishes[index].price)
                 });
             })
         }
@@ -73,7 +85,7 @@ export default {
         this.fillOrder();
 
         this.getDishes();
-        console.log(this.store.dishes)
+        
 
     }
 }
@@ -82,17 +94,24 @@ export default {
 <style lang="scss" scoped>
 .my-modal {
     width: 300px;
-    top: 20px;
+    top: 25px;
     right: -55px;
     background-color: white;
-    border: 1px solid black;
-
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    color: black;
     ul {
         list-style: none;
-    }
-
-    li {
-        color: black;
+        padding: 0;
+        overflow-y: auto;
+        max-height: 250px;
+        li {
+            width: 100%;
+            padding-left: 1rem;
+        }
+        li:hover {
+            background-color: #EAE7E7;
+        }
     }
 
     .my-img {
