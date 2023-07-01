@@ -10,7 +10,7 @@
             <div class="item-content p-1 d-flex justify-content-center flex-wrap">
                 <div class="text-center">
                     <h3>{{ dish.name }}</h3>
-                    <h4> <strong>Prezzo:</strong> {{ dish.price }} $</h4>
+                    <h4> <strong>Prezzo:</strong> {{ dish.price }} €</h4>
                 </div>
                 <div>
                     <div class="d-flex align-items-center justify-content-center">
