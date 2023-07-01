@@ -1,26 +1,6 @@
 <template>
-    <!-- <section class="my-section">
-    <div class="w-100">
-        <nav class="d-flex justify-content-between align-items-center px-2">
-        <div class="logo">
-            <img src="../../../public/logo-deliveroo.png" alt="logo" class="d-none d-lg-block my-logo">
-            <img src="../../../public/logo-sm-deliveroo.png" alt="logo" class="d-lg-none my-logo">
-        </div>
-        <ul>
-            <li v-for="item in menuItems"> 
-                    <router-link :to="{name: item.routeName}" class="nav-link">{{item.label}}</router-link>
-            </li>
-            <li><a href="#">Ristoranti</a></li>
-            <li><a href="#">Contatti</a></li>
-        </ul>
-
-    </nav>
-
-    </div>
-    
-  </section> -->
     <nav class="navbar navbar-expand-lg sticky-top">
-        <div class="container-fluid">
+        <div class="container d-flex justify-content-between">
 
             <img src="../../../public/logo-deliveroo.png" alt="logo" class="my-logo">
 
@@ -28,12 +8,12 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse d-lg-flex justify-content-end flex-wrap" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item" v-for="item in menuItems">
+                    <li class="nav-item text-end" v-for="item in menuItems">
                         <router-link :to="{ name: item.routeName }">{{ item.label }}</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item text-end pe-4">
                         <div @mouseover="store.showModal = true" @mouseleave="store.showModal = false"
                             class="position-relative d-none d-lg-block">
                             <i class="fa-solid fa-cart-shopping position-relative">
@@ -71,13 +51,10 @@
 
 nav {
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     width: 100%;
     background-color: $bg-primary;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
+
 
     .my-logo {
         height: 70px;
@@ -107,6 +84,10 @@ nav {
 
             a:hover {
                 border-bottom: 2px solid white;
+            }
+
+            i:hover {
+                cursor: pointer;
             }
 
 

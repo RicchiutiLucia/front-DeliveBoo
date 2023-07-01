@@ -118,7 +118,6 @@ export default {
       });
     },
     submitPaymentMethodNonce(paymentMethodNonce) {
-
       axios.post(`${this.store.baseUrl}/payment/process`, {
         paymentMethodNonce: paymentMethodNonce,
         amount: this.amount,
@@ -285,7 +284,7 @@ input {
   background-color: white;
   border: 1px solid rgb(186, 186, 186);
   border-radius: 5px;
-  margin: 13px 12px -34px;
+  margin: 13px 12px 10px;
 
 }
 

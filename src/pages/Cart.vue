@@ -3,41 +3,48 @@
 
 
 
-    <div class="d-flex mx-3 flex-wrap gap-3 justify-content-center ">
-        <div v-if="store.dishes.length > 0" class="card ms_card" style="width: 20rem;"
-            v-for="(dish, index) in store.dishes " :key="index">
+    <div class="container">
 
-            <div class="ms_img_container">
-                <img class="card-img-top " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ dish.name }}</h5>
-                <p class="card-price">{{ dish.price }}</p>
+        <div v-if="store.dishes.length > 0" class="row ">
+            <div class="card ms_card col-12 col-sm-6 col-md-4" v-for="(dish, index) in store.dishes " :key="index">
 
-                <div>
-                    <span>Quantità</span>
-                    <div class="d-flex align-items-center">
-                        <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)"><i
-                                class="fa-solid fa-minus"></i></div>
-                        <div>{{ store.order[index].quantity }}</div>
-                        <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)"><i
-                                class="fa-solid fa-plus"></i></div>
-
+                <div class="ms_img_container">
+                    <img class="card-img-top " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ dish.name }}</h5>
+                    <p class="card-price">{{ dish.price }}</p>
+                    <div>
+                        <span>Quantità</span>
+                        <div class="d-flex align-items-center">
+                            <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)">
+                                <i class="fa-solid fa-minus"></i>
+                            </div>
+                            <div>
+                                {{ store.order[index].quantity }}
+                            </div>
+                            <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)">
+                                <i class="fa-solid fa-plus"></i>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
-
-
         </div>
+
+
+
+
         <div v-else>
-            <h2>Il Carrello è vuoto</h2>
+            <h2 class="text-center">Il Carrello è vuoto</h2>
         </div>
-        <div class="container">
-            <div v-if="store.dishes.length > 0">
-                <h2>Totale: {{ sum.toFixed(2) }}</h2>
-            </div>
+    </div>
+    <div>
 
+        <div class="container" v-if="store.dishes.length > 0">
+            <div>
+                <h2 class="text-center">Totale: {{ sum.toFixed(2) }} </h2>
+            </div>
         </div>
 
     </div>
@@ -159,19 +166,21 @@ export default {
 <style scoped>
 img {
     object-fit: cover;
-    overflow: hidden;
-    height: 250px;
+
+
 
 
 }
 
 .ms_img_container {
-    max-height: 50%;
+    height: 250px;
+    overflow: hidden;
 
 }
 
 .ms_card {
     max-height: 500px;
+
 
 }
 
