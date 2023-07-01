@@ -1,44 +1,39 @@
 <template>
-    <h1 class="text-center mb-3">Carrello</h1>
-
-
-
     <div class="container">
-
-        <div v-if="store.dishes.length > 0" class="row ">
-            <div class="card ms_card col-12 col-sm-6 col-md-4" v-for="(dish, index) in store.dishes " :key="index">
-
-                <div class="ms_img_container">
-                    <img class="card-img-top " :src="`http://localhost:8000/storage/${dish.image}`" alt="Card image cap">
+        <h1 class="text-center mb-3">Carrello</h1>
+        <div v-if="store.dishes.length > 0" class="d-flex justify-content-center flex-wrap gap-3 my-4">
+            <div class="my-card" v-for="(dish, index) in store.dishes" :key="index">
+                <div class="item-image container mt-1">
+                    <img :src="`http://localhost:8000/storage/${dish.image}`">
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{ dish.name }}</h5>
-                    <p class="card-price">{{ dish.price }}</p>
+                <div class="item-content p-1 d-flex justify-content-center flex-wrap">
+                    <div class="text-center w-100">
+                        <h3>{{ dish.name }}</h3>
+                        <h4> <strong>Prezzo:</strong> {{ dish.price }} €</h4>
+                    </div>
                     <div>
-                        <span>Quantità</span>
-                        <div class="d-flex align-items-center">
-                            <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)">
-                                <i class="fa-solid fa-minus"></i>
-                            </div>
-                            <div>
-                                {{ store.order[index].quantity }}
-                            </div>
-                            <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)">
-                                <i class="fa-solid fa-plus"></i>
-                            </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="p-2 border border-dark rounded m-2" @click="removeQuantityCart(dish.id)"><i
+                                    class="fa-solid fa-minus"></i></div>
+                            <div>{{ store.order[index].quantity }}</div>
+                            <div class="p-2 border border-dark rounded m-2" @click="addQuantityCart(dish.id)"><i
+                                    class="fa-solid fa-plus"></i></div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
-
-
-
-
         <div v-else>
-            <h2 class="text-center">Il Carrello è vuoto</h2>
+            <h2 class="text-center">Il Carrello è vuoto <router-link class="ms-btn text-decoration-none p-1"
+                    :to="{ name: home }">Torna
+                    alla
+                    Home</router-link></h2>
         </div>
     </div>
+
+
     <div>
 
         <div class="container" v-if="store.dishes.length > 0">
@@ -163,30 +158,58 @@ export default {
 }
 </script>
 
-<style scoped>
-img {
-    object-fit: cover;
+<style scoped lang="scss">
+@use '../style/general.scss';
+@import '../style/partials/_variables.scss';
 
+.my-card {
+    height: 310px;
+    width: 250px;
+    background-color: #fffbfb;
+    border-radius: 20px;
+    position: relative;
 
-
-
+    &:hover {
+        transform: scale(1.03);
+    }
 }
 
-.ms_img_container {
-    height: 250px;
+.my-card .item-image {
+    width: 100%;
+    height: 160px;
     overflow: hidden;
-
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px
 }
 
-.ms_card {
-    max-height: 500px;
-
-
+.my-card .item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover
 }
 
 
 
-.card-body {
-    height: 300px;
+.item-content h3 {
+    font-size: 20px;
+    height: 45px
+}
+
+.item-content h4 {
+    font-size: 15px;
+    font-weight: 500
+}
+
+.ms-btn {
+    background-color: $bg-primary;
+    color: white;
+    margin-top: 10px;
+    border-radius: 10px;
+
+    &:hover {
+        border: 2px solid $bg-secondary;
+        background-color: white;
+        color: black;
+    }
 }
 </style>

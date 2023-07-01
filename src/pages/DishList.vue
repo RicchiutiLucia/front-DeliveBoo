@@ -3,14 +3,14 @@
 
 
     <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
-        <div class="my-card" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true"> 
-            <div class="item-image container mt-1"> 
-                <img :src="`http://localhost:8000/storage/${dish.image}`"> 
-            </div> 
-            <div class="item-content p-1 d-flex justify-content-center flex-wrap"> 
+        <div class="my-card" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
+            <div class="item-image container mt-1">
+                <img :src="`http://localhost:8000/storage/${dish.image}`">
+            </div>
+            <div class="item-content p-1 d-flex justify-content-center flex-wrap">
                 <div class="text-center">
-                    <h3>{{ dish.name }}</h3> 
-                    <h4> <strong>Prezzo:</strong> {{ dish.price }} $</h4> 
+                    <h3>{{ dish.name }}</h3>
+                    <h4> <strong>Prezzo:</strong> {{ dish.price }} $</h4>
                 </div>
                 <div>
                     <div class="d-flex align-items-center justify-content-center">
@@ -28,35 +28,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="dish-box m-3 pb-2" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
-            <div class="dish-img d-flex justify-content-center mt-3">
-                <img class="rounded " v-if="dish.image" :src="`http://localhost:8000/storage/${dish.image}`"
-                    alt="Card image cap">
-                <img class="rounded " v-else
-                    src="https://prolococaluso.altervista.org/wp-content/uploads/2013/03/immagine-non-disponibile-3.gif"
-                    alt="Card image cap">
-            </div>
-            <div class="px-3">
-                <p class="text-center px-4 overflow-x-hidden">{{ dish.name }}</p>
-                <p class="text-center">{{ dish.price }}</p>
-                <div>
-                    <p class="text-center">Quantità </p>
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div class="p-2 border border-dark rounded m-2" @click="removeQuantity(dish.id)"><i
-                                class="fa-solid fa-minus"></i></div>
-                        <div>{{ quantity[index].quantity }}</div>
-                        <div class="p-2 border border-dark rounded m-2" @click="addQuantity(dish.id, index)"><i
-                                class="fa-solid fa-plus"></i></div>
 
-                        <button @click="addToCart(dish.id, quantity[index].quantity, index)" class="ms_btn"
-                            :disabled="disableBtn">
-                            <i class="fa-solid fa-cart-plus"></i>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div> -->
 
     </div>
     <h2 v-if="disableBtn" class="text-center text-danger ms-shake-error">Non puoi aggiungere un piatto di un'altro
@@ -257,10 +229,12 @@ export default {
     background-color: #fffbfb;
     border-radius: 20px;
     position: relative;
-     &:hover {
-             transform: scale(1.03);
-        }
+
+    &:hover {
+        transform: scale(1.03);
+    }
 }
+
 .my-card .item-image {
     width: 100%;
     height: 160px;
@@ -280,7 +254,6 @@ export default {
 .item-content h3 {
     font-size: 20px;
     height: 45px
-    
 }
 
 .item-content h4 {
