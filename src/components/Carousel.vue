@@ -3,21 +3,21 @@
         <h3 class="text-center py-4">I RISTORANTI CONSIGLIATI</h3>
         <div class=" d-flex flex-wrap justify-content-center">
             
-            <div class="restaurant-card m-4"  v-for="restaurant in randomRestaurants">
+            <div class="restaurant-card m-4"  v-for="(restaurant, index) in randomRestaurants" :key="index" >
                 <div class="w-100 d-flex justify-content-center flex-wrap">
                     <img :src="restaurant.image" alt="" class="background-image">
                 </div>
                 <div class="text-center pt-2">
                     <span class="fw-bold">{{ restaurant.name }}</span>
                 </div>
-                <!-- Button per la rotta per il menu del ristorante
+              
                     
-                    <div class="d-flex justify-content-center my-2 sci">
+                <div class="d-flex justify-content-center my-2 sci">
                     <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
                         <button class="btn btn-warning">Menú</button>
                     </router-link>
 
-                </div> -->
+                </div> 
             
             </div>
             
@@ -81,7 +81,7 @@
                     let index = Math.floor(Math.random() * this.restaurants.length);
                     if(!this.randomRestaurants.some(el => el.id == index)) {
                             this.randomRestaurants.push({
-                                id: index,
+                                id: index + 1,
                                 name: this.restaurants[index].name, 
                                 image: this.restaurants[index].image
                             })
