@@ -232,6 +232,7 @@ export default {
 
     &:hover {
         transform: scale(1.03);
+        border: 1px solid $bg-secondary;
     }
 }
 
