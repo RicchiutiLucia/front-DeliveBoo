@@ -27,7 +27,7 @@
         </div>
         <div v-else>
             <h2 class="text-center">Il Carrello è vuoto <router-link class="ms-btn text-decoration-none p-1"
-                    :to="{ name: home }">Torna
+                    :to="{ name: 'home' }">Torna
                     alla
                     Home</router-link></h2>
         </div>
