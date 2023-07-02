@@ -7,14 +7,14 @@
                 <div class="w-100 d-flex justify-content-center flex-wrap">
                     <img :src="restaurant.image" alt="" class="background-image">
                 </div>
-                <div class="text-center pt-2">
+                <div class="text-center pt-2" style="height: 50px;">
                     <span class="fw-bold">{{ restaurant.name }}</span>
                 </div>
               
                     
                 <div class="d-flex justify-content-center my-2">
                     <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
-                        <button class="btn btn-warning">Menú</button>
+                        <button class="ms_btn">Menú</button>
                     </router-link>
 
                 </div> 
@@ -58,6 +58,19 @@
 	      opacity: 1;
           
         }}
+
+.ms_btn {
+    background-color: $bg-primary;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+
+    &:hover {
+        background-color: $bg-secondary;
+    }
+}
+
 
 </style>
 

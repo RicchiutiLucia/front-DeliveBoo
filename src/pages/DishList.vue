@@ -11,7 +11,8 @@
             <div class="item-content p-1 d-flex justify-content-center flex-wrap">
                 <div class="text-center">
                     <h3>{{ dish.name }}</h3>
-                    <h4> <strong>Prezzo:</strong> {{ dish.price }} €</h4>
+                    
+                    <h4 class="py-1"> <strong>Prezzo:</strong> {{ dish.price }} €</h4>
                 </div>
                 <div>
                     <div class="d-flex align-items-center justify-content-center">
@@ -234,7 +235,7 @@ export default {
 
 
 .my-card {
-    height: 310px;
+   
     width: 250px;
     background-color: #fffbfb;
     border-radius: 20px;
@@ -257,19 +258,23 @@ export default {
 .my-card .item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover
+    object-fit: cover;
+    &:hover{
+        transform: scale(1.03);
+    }
 }
 
 
 
 .item-content h3 {
-    font-size: 20px;
-    height: 45px
+    font-size: 18px;
+    font-weight: 500;
+    height: 30px
 }
 
 .item-content h4 {
     font-size: 15px;
-    font-weight: 500
+  
 }
 
 
