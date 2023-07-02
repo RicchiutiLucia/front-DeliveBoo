@@ -4,12 +4,12 @@
  
             
             <div v-if="!store.isEmpty">
-                <h5 class="text-bold p-1">Il tuo carrello</h5>  
+                <h5 class="text-bold text-center p-1">Il tuo carrello</h5>  
                 <hr class="m-0">
                 <ul>
                     <li v-for="(dish, index) in store.dishes" :key="index" class="py-2 d-flex align-items-center">
 
-                        <div class="my-img-wrapper d-flex justify-content-center">
+                        <div class="my-img-wrapper d-flex justify-content-center ">
                             <img class="my-img" :src="`http://localhost:8000/storage/${dish.image}`" alt="">
                         </div>
                         <div class="ms-2">
@@ -106,7 +106,7 @@ export default {
         overflow-y: auto;
         max-height: 250px;
         li {
-            width: 100%;
+            text-align: left;
             padding-left: 1rem;
         }
         li:hover {
@@ -119,8 +119,8 @@ export default {
     }
 
     .my-img-wrapper {
-        width: 50px;
-        height: 50px;
+        width: 75px;
+        height: 65px;
         overflow: hidden;
     }
 }
