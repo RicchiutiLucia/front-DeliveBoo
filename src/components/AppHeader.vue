@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse d-lg-flex justify-content-end flex-wrap" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item text-end" v-for="item in menuItems">
-                        <router-link :to="{ name: routeName }">{{ item.label }}</router-link>
+                        <router-link :to="{ name: item.routeName }">{{ item.label }}</router-link>
                     </li>
                     <li class="nav-item text-end pe-4">
                         <div @mouseover="store.showModal = true" @mouseleave="store.showModal = false"
