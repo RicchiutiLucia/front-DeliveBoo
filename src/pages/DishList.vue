@@ -1,8 +1,9 @@
 <template>
     <h1 class="text-center mb-3">Menu</h1>
-
-
-    <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
+    <div v-if="loaderDisches">
+        <Loader></Loader>
+    </div>
+    <div v-else class="d-flex justify-content-center flex-wrap gap-3 my-4">
         <div class="my-card" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
             <div class="item-image container mt-1">
                 <img :src="`http://localhost:8000/storage/${dish.image}`">
@@ -41,6 +42,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store';
+import Loader from '../components/Loader.vue';
 
 export default {
     name: 'DishList',
@@ -50,16 +52,22 @@ export default {
             dishes: [],
             quantity: [],
             i: 1,
-            disableBtn: false
+            disableBtn: false,
+            loaderDisches: false
         }
+    },
+    components: {
+        Loader
     },
     methods: {
         getDishes(id) {
+            this.loaderDisches = true;
             axios.get(`${this.store.baseUrl}/dishes/${id}`).then(response => {
                 //console.log(response);
                 this.dishes = response.data.result;
                 this.createQuantityArray();
                 //console.log(this.quantity);
+                this.loaderDisches = false;
             })
         },
         createQuantityArray() {
@@ -101,91 +109,93 @@ export default {
 
         },
         addToCart(id, quantity, ix) {
-            let cartOrders = Object.values({ ...localStorage });
+            if (quantity != 0) {
+                let cartOrders = Object.values({ ...localStorage });
 
 
 
-            let keys = Object.keys({ ...localStorage })
-            let myid = [];
+                let keys = Object.keys({ ...localStorage })
+                let myid = [];
 
-            console.log(cartOrders);
+                console.log(cartOrders);
 
-            if (cartOrders != '') {
-                cartOrders.forEach(el => {
-                    let newEl = JSON.parse(el)
-                    myid.push(newEl.id)
-                })
-                //console.log(myid)
-            }
-
-
-
-            if (keys.length) {
-
-                let keysNum = keys.map(el => {
-                    return Number(el)
-                })
-
-                //console.log(keysNum)
-
-                let big = Math.max(...keysNum)
-
-                //console.log(big)
-
-                if (this.i <= big) {
-                    this.i = big + 1
+                if (cartOrders != '') {
+                    cartOrders.forEach(el => {
+                        let newEl = JSON.parse(el)
+                        myid.push(newEl.id)
+                    })
+                    //console.log(myid)
                 }
 
-                //console.log(this.i)
-            }
 
-            if (myid.includes(id)) {
 
-                cartOrders.forEach((el, index) => {
-                    const newEl = JSON.parse(el)
-                    if (newEl.id == id) {
-                        //console.log('newEl', newEl)
-                        newEl.quantity += quantity
-                        localStorage.setItem(`${index + 1}`, JSON.stringify(newEl));
-                        //console.log('quantity', this.quantity)
+                if (keys.length) {
 
-                    }
-                })
+                    let keysNum = keys.map(el => {
+                        return Number(el)
+                    })
 
-            } else {
-                console.log('quantity', this.quantity);
-                this.quantity.forEach(element => {
-                    if (element.id == id && element.quantity > 0) {
-                        localStorage.setItem(`${this.i}`, JSON.stringify(element));
-                        this.i++
+                    //console.log(keysNum)
+
+                    let big = Math.max(...keysNum)
+
+                    //console.log(big)
+
+                    if (this.i <= big) {
+                        this.i = big + 1
                     }
 
-                })
+                    //console.log(this.i)
+                }
 
-            }
+                if (myid.includes(id)) {
+
+                    cartOrders.forEach((el, index) => {
+                        const newEl = JSON.parse(el)
+                        if (newEl.id == id) {
+                            //console.log('newEl', newEl)
+                            newEl.quantity += quantity
+                            localStorage.setItem(`${index + 1}`, JSON.stringify(newEl));
+                            //console.log('quantity', this.quantity)
+
+                        }
+                    })
+
+                } else {
+                    console.log('quantity', this.quantity);
+                    this.quantity.forEach(element => {
+                        if (element.id == id && element.quantity > 0) {
+                            localStorage.setItem(`${this.i}`, JSON.stringify(element));
+                            this.i++
+                        }
+
+                    })
+
+                }
 
 
-            this.quantity[ix].quantity = 0
-            this.store.isEmpty = false
-            /* this.fillOrder()
-           this.getDishes() */
-            let arr = Object.values({ ...localStorage }).map(el => { return JSON.parse(el) })
-            console.log(arr);
-            this.store.dishes = []
-            arr.forEach(element => {
-                axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
-                    console.log("response", response.data.result);
-                    this.store.dishes.push(response.data.result[0]);
-                    this.store.dishes = this.store.dishes.sort((a, b) => {
-                        return a.id - b.id;
+                this.quantity[ix].quantity = 0
+                this.store.isEmpty = false
+                /* this.fillOrder()
+               this.getDishes() */
+                let arr = Object.values({ ...localStorage }).map(el => { return JSON.parse(el) })
+                console.log(arr);
+                this.store.dishes = []
+                arr.forEach(element => {
+                    axios.get(`${this.store.baseUrl}/dish/${element.id}`).then(response => {
+                        console.log("response", response.data.result);
+                        this.store.dishes.push(response.data.result[0]);
+                        this.store.dishes = this.store.dishes.sort((a, b) => {
+                            return a.id - b.id;
+                        });
+
                     });
-
                 });
-            });
-            let ss = Object.values({ ...localStorage });
-            //console.log(cartOrders)
-            this.store.order = ss.map(element => { return JSON.parse(element); });
-            console.log('dishes', this.store.order, this.store.dishes)
+                let ss = Object.values({ ...localStorage });
+                //console.log(cartOrders)
+                this.store.order = ss.map(element => { return JSON.parse(element); });
+                console.log('dishes', this.store.order, this.store.dishes)
+            }
         },
         /* getDishes() {
             this.store.order.forEach(element => {

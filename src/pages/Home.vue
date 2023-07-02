@@ -5,9 +5,11 @@
 
 
     <h3 class="text-center my-3">SCEGLI LA CATEGORIA</h3>
-    <div class="container my-3">
-
-        <fieldset class="checkbox-group">
+    <div v-if="loaderCategories">
+        <Loader></Loader>
+    </div>
+    <div v-else class="container my-3">
+        <fieldset id="prova" class="checkbox-group">
 
             <div class="checkbox" v-for="(category, i) in categories">
                 <label class="checkbox-wrapper">
@@ -24,7 +26,7 @@
         </fieldset>
         <div class="d-flex justify-content-center">
             <button @click="searchCategories(selected)" class=" ms_btn my-3">
-                <a href="#filtered_restaurants" class="ms_link_restaurants">Cerca Ristorante</a>
+                <a href="#prova" class="ms_link_restaurants">Cerca Ristorante</a>
             </button>
 
             <!-- contenitore usato per spostarsi al click sui ristorante filtarti -->
@@ -32,51 +34,39 @@
         </div>
         <h3 class="text-center text-danger" :class="!checkCategory ? 'd-none' : ''">SELEZIONE ALMENO 1 CATEGORIA
         </h3>
+
     </div>
 
     <div v-if="selectedRestaurants">
         <h3 class="text-center">RISTORANTI</h3>
         <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
-            
-            <div class="my-card" v-for="(restaurant, index) in restaurants" :key="index"> 
-            <div class="item-image container mt-1"> 
-                <img :src="restaurant.image"> 
-            </div> 
-            <div class="item-content p-1"> 
-                <div class="text-center">
-                    <h3>{{ restaurant.name }}</h3> 
-                    <h4> <strong>Categorie: </strong></h4> 
-                    <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
-                                class="ms_btn">Menú</button></router-link>
+
+            <div class="my-card" v-for="(restaurant, index) in restaurants" :key="index">
+                <div class="item-image container mt-1">
+                    <img :src="restaurant.image">
                 </div>
-                <div>
-                    
-                </div>
-            </div>
-        </div>
-            <!-- <div class="row g-4 my-2 d-flex justify-content-center flex-wrap">
-                <h3 class="text-center">RISTORANTI</h3>
-                <div class="col-lg-3 col-md-6" v-for="(restaurant, index) in  restaurants" :key="index">
-                    <div class="restaurant-item text-center">
-                        <div class="my-3">
-                            <img class="img-fluid my-img pt-2" :src="restaurant.image" alt="Card image cap">
-                        </div>
+                <div class="item-content p-1">
+                    <div class="text-center">
                         <h3>{{ restaurant.name }}</h3>
-                        <p>{{ restaurant.description }}</p>
+                        <h4> <strong>Categorie: </strong></h4>
                         <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
                                 class="ms_btn">Menú</button></router-link>
                     </div>
+                    <div>
 
+                    </div>
                 </div>
-            </div> -->
-
+            </div>
         </div>
     </div>
+    <div v-if="loaderRestaurants">
+        <Loader></Loader>
+    </div>
     <AppFloat></AppFloat>
-    
-        <Carousel></Carousel>
-    
-    
+
+    <Carousel></Carousel>
+
+
     <AppWhyUs></AppWhyUs>
 </template>
 
@@ -88,16 +78,18 @@ import SingleCategoryCard from '../components/SingleCategoryCard.vue';
 import AppFloat from '../components/AppFloat.vue';
 import AppWhyUs from '../components/AppWhyUs.vue';
 import Carousel from '../components/Carousel.vue';
+import Loader from '../components/Loader.vue';
 
 export default {
     name: 'Home',
     components: {
-    AppJumbo,
-    SingleCategoryCard,
-    AppFloat,
-    AppWhyUs,
-    Carousel
-},
+        AppJumbo,
+        SingleCategoryCard,
+        AppFloat,
+        AppWhyUs,
+        Carousel,
+        Loader
+    },
     data() {
 
 
@@ -109,20 +101,27 @@ export default {
             selected: [],
             restaurants: [],
             selectedRestaurants: false,
-            checkCategory: false
+            checkCategory: false,
+            loaderRestaurants: false,
+            loaderCategories: false
         }
     },
     methods: {
         fetchCategories() {
+            this.loaderCategories = true;
             axios.get(`${this.store.baseUrl}/categories`).then(res => {
-                this.categories = res.data.result
-                this.categoriesLoaded = true
+                this.categories = res.data.result;
+                this.loaderCategories = false;
+                this.categoriesLoaded = true;
+
             })
         },
         searchCategories(i) {
-            this.checkCategory = false
+
+            this.checkCategory = false;
             console.log(this.selected);
             if (this.selected.length > 0) {
+                this.loaderRestaurants = true
                 axios.get(`${this.store.baseUrl}/categories/${this.selected.join('-')}`).then(res => {
                     this.restaurants = res.data.result
                     if (res.data.result.length > 0) {
@@ -131,9 +130,11 @@ export default {
                         this.selectedRestaurants = false
                     }
                     console.log(this.restaurants);
+                    this.loaderRestaurants = false
                 }).catch(err => {
                     console.log('non va');
                 })
+
             }
             else {
                 this.checkCategory = true;
@@ -176,6 +177,7 @@ export default {
 @import '../style/partials/_variables.scss';
 
 
+
 .category-container {
     display: flex;
     justify-content: center;
@@ -212,6 +214,7 @@ export default {
     }
 
 }
+
 .checkbox-group {
     display: flex;
     flex-wrap: wrap;
@@ -226,6 +229,7 @@ export default {
         margin: .5rem 0.5rem;
     }
 }
+
 .checkbox-group-legend {
     font-size: 1.5rem;
     font-weight: 700;
@@ -344,11 +348,13 @@ export default {
     background-color: #fffbfb;
     border-radius: 20px;
     position: relative;
-     &:hover {
-             transform: scale(1.03);
-             border: 1px solid $bg-secondary;
-        }
+
+    &:hover {
+        transform: scale(1.03);
+        border: 1px solid $bg-secondary;
+    }
 }
+
 .my-card .item-image {
     width: 100%;
     height: 160px;
@@ -368,7 +374,6 @@ export default {
 .item-content h3 {
     font-size: 20px;
     height: 45px
-    
 }
 
 .item-content h4 {
