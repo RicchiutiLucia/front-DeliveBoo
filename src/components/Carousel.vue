@@ -91,20 +91,23 @@
         },
         methods: {
             randRestaurants() {
-                for(let i = 0; i < 4; i++) {
-                    let index = Math.floor(Math.random() * this.restaurants.length);
-                    if(!this.randomRestaurants.some(el => el.id == index)) {
-                            this.randomRestaurants.push({
-                                id: index + 1,
-                                name: this.restaurants[index].name, 
-                                image: this.restaurants[index].image
-                            })
-                    } else {
-                        i--
-                    } 
-                }
-               
-            }
+  let availableIndexes = Array.from(Array(this.restaurants.length).keys());
+  this.randomRestaurants = [];
+
+  for (let i = 0; i < 4; i++) {
+    let index = Math.floor(Math.random() * availableIndexes.length);
+    let restaurantIndex = availableIndexes[index];
+    
+    this.randomRestaurants.push({
+      id: restaurantIndex + 1,
+      name: this.restaurants[restaurantIndex].name,
+      image: this.restaurants[restaurantIndex].image
+    });
+
+    availableIndexes.splice(index, 1);
+  }
+}
+
         },
         
         created() {
