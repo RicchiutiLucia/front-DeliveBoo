@@ -33,10 +33,10 @@
 
     </div>
 
-
-
-
-    <div class="payment-right h-100 container pb-3">
+    <div :class="loaderPayment ? 'd-none' : ''">
+      <Loader></Loader>
+    </div>
+    <div class="payment-right h-100 container pb-3" :class="loaderPayment ? '' : 'd-none'">
       <div id="dropin-container"></div>
       <button @click="submitPayment(), submitForm()" class="btn ms-btn">Submit Payment</button>
     </div>
@@ -47,11 +47,15 @@
 import axios from 'axios';
 import braintree from 'braintree-web-drop-in';
 import { store } from '../store'
+import Loader from '../components/Loader.vue';
 
 export default {
   props: {
     amount: Number,
     items: Array
+  },
+  components: {
+    Loader
   },
   data() {
     return {
@@ -67,7 +71,8 @@ export default {
         address: ''
       },
       items: [],
-      errors: {}
+      errors: {},
+      loaderPayment: true
     }
   },
   mounted() {
@@ -101,6 +106,7 @@ export default {
       );
     },
     submitPayment() {
+
       if (!this.braintreeInstance) {
         console.error('Braintree Drop-in is not initialized.');
         return;
@@ -118,6 +124,7 @@ export default {
       });
     },
     submitPaymentMethodNonce(paymentMethodNonce) {
+      this.loaderPayment = false;
       axios.post(`${this.store.baseUrl}/payment/process`, {
         paymentMethodNonce: paymentMethodNonce,
         amount: this.amount,
@@ -135,6 +142,7 @@ export default {
           this.newOrder.status = false;
           this.newOrder.total_price = 0;
           this.newOrder.address = '';
+          this.loaderPayment = true;
         })
         .catch((error) => {
           console.error(error);
@@ -203,7 +211,7 @@ export default {
           console.log(response);
 
         })
-        
+
     },
     submitForm() {
       this.errors = {};
@@ -281,6 +289,7 @@ input {
 }
 
 .ms-payment {
+  background-color: white;
   border: 2px solid $bg-secondary;
   border-radius: 5px;
   margin: 30px auto;

@@ -49,7 +49,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <span><i :class="item.icon"></i></span>
-                        <h5 class="py-2">{{item.title}}</h5>
+                        <h5 class="py-1">{{item.title}}</h5>
                         <p>{{item.subtitle}}</p>
                     </div>
                 </div>

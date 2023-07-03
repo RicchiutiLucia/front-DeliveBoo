@@ -7,14 +7,14 @@
                 <div class="w-100 d-flex justify-content-center flex-wrap">
                     <img :src="restaurant.image" alt="" class="background-image">
                 </div>
-                <div class="text-center pt-2">
-                    <span class="fw-bold">{{ restaurant.name }}</span>
+                <div class="text-center pt-1" style="height: 10px;">
+                    <span class="fw-bold tronca">{{ restaurant.name }}</span>
                 </div>
               
                     
                 <div class="d-flex justify-content-center my-2">
                     <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
-                        <button class="btn btn-warning">Menú</button>
+                        <button class="ms_btn mt-3">Menú</button>
                     </router-link>
 
                 </div> 
@@ -59,6 +59,25 @@
           
         }}
 
+.ms_btn {
+    background-color: $bg-primary;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+
+    &:hover {
+        background-color: $bg-secondary;
+    }
+}
+.tronca {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+width: 100%;
+}
+
+
 </style>
 
 
@@ -78,20 +97,23 @@
         },
         methods: {
             randRestaurants() {
-                for(let i = 0; i < 4; i++) {
-                    let index = Math.floor(Math.random() * this.restaurants.length);
-                    if(!this.randomRestaurants.some(el => el.id == index)) {
-                            this.randomRestaurants.push({
-                                id: index + 1,
-                                name: this.restaurants[index].name, 
-                                image: this.restaurants[index].image
-                            })
-                    } else {
-                        i--
-                    } 
-                }
-               
-            }
+  let availableIndexes = Array.from(Array(this.restaurants.length).keys());
+  this.randomRestaurants = [];
+
+  for (let i = 0; i < 4; i++) {
+    let index = Math.floor(Math.random() * availableIndexes.length);
+    let restaurantIndex = availableIndexes[index];
+    
+    this.randomRestaurants.push({
+      id: restaurantIndex + 1,
+      name: this.restaurants[restaurantIndex].name,
+      image: this.restaurants[restaurantIndex].image
+    });
+
+    availableIndexes.splice(index, 1);
+  }
+}
+
         },
         
         created() {
