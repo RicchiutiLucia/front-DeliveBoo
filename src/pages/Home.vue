@@ -48,7 +48,7 @@
                 <div class="item-content p-1">
                     <div class="text-center">
                         <h3>{{ restaurant.name }}</h3>
-                        <h4> <strong>Categorie: </strong>{{ restaurant.description }}</h4>
+                        <h4> <strong>Categorie: </strong></h4>
                         <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
                                 class="ms_btn">Menú</button></router-link>
                     </div>
@@ -372,8 +372,8 @@ export default {
 
 
 .item-content h3 {
-    font-size: 20px;
-    height: 45px
+    font-size: 18px;
+    height: 36px
 }
 
 .item-content h4 {
