@@ -272,7 +272,7 @@ export default {
 .item-content h3 {
     font-size: 18px;
     font-weight: 500;
-    height: 30px
+    
 }
 
 .item-content h4 {
