@@ -30,6 +30,10 @@
                     :to="{ name: 'home' }">Torna
                     alla
                     Home</router-link></h2>
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <strong>Complimenti!</strong> Ordine effettuato con successo!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
         </div>
     </div>
 
