@@ -44,10 +44,9 @@
                 </div>
                 <div class="item-content p-1">
                     <div class="text-center">
-                        <h3>{{ restaurant.name }}</h3>
+                        <h3 class="pt-1">{{ restaurant.name }}</h3>
                         <h4> <strong>Categorie: </strong></h4>
-                        <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
-                                class="ms_btn">Menú</button></router-link>
+                        <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button class="ms_btn">Menú</button></router-link>
                     </div>
                     <div>
 
@@ -344,11 +343,12 @@ export default {
 }
 
 .my-card {
-    height: 310px;
-    width: 250px;
+   
+    width: 280px;
     background-color: #fffbfb;
     border-radius: 20px;
     position: relative;
+    box-shadow: 1px 1px  $bg-secondary, 1px 1px $bg-secondary;
 
     &:hover {
         transform: scale(1.03);
@@ -367,7 +367,10 @@ export default {
 .my-card .item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover
+    object-fit: cover;
+    &:hover{
+        transform: scale(1.03);
+    }
 }
 
 
