@@ -1,8 +1,5 @@
 <template>
     <AppJumbo></AppJumbo>
-    <SingleCategoryCard></SingleCategoryCard>
-
-
 
     <h3 class="text-center my-3">SCEGLI LA CATEGORIA</h3>
     <div v-if="loaderCategories">
@@ -63,7 +60,6 @@
         <Loader></Loader>
     </div>
     <AppFloat></AppFloat>
-
     <Carousel></Carousel>
     <AppWhyUs></AppWhyUs>
 </template>
@@ -72,7 +68,6 @@
 import axios from 'axios';
 import { store } from '../store.js'
 import AppJumbo from '../components/AppJumbo.vue';
-import SingleCategoryCard from '../components/SingleCategoryCard.vue';
 import AppFloat from '../components/AppFloat.vue';
 import AppWhyUs from '../components/AppWhyUs.vue';
 import Carousel from '../components/Carousel.vue';
@@ -82,7 +77,6 @@ export default {
     name: 'Home',
     components: {
         AppJumbo,
-        SingleCategoryCard,
         AppFloat,
         AppWhyUs,
         Carousel,

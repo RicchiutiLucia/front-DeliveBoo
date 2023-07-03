@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from './pages/Home.vue';
 import DishList from './pages/DishList.vue';
-import RestaurantList from './pages/RestaurantList.vue';
 import NotFound from './pages/NotFound.vue';
 import Cart from './pages/Cart.vue'
 
@@ -18,11 +17,6 @@ const router = createRouter(
                 path: '/dishes/:id',
                 name: 'dish-list',
                 component: DishList
-            },
-            {
-                path: '/restaurants',
-                name: 'restaurants-list',
-                component: RestaurantList
             },
             {
                 path: '/cart',
