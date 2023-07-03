@@ -38,16 +38,18 @@
         <h3 class="text-center">RISTORANTI</h3>
         <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
             <div class="my-card" v-for="(restaurant, index) in restaurants" :key="index">
-                <h1>{{ restaurant.category_id }}</h1>
+                
                 <div class="item-image container mt-1">
                     <img :src="restaurant.image">
                 </div>
                 <div class="item-content p-1">
                     <div class="text-center">
-                        <h3>{{ restaurant.name }}</h3>
-                        <h4> <strong>Categorie: </strong></h4>
-                        <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
-                                class="ms_btn">Menú</button></router-link>
+                        <h3 class="pt-1">{{ restaurant.name }}</h3>
+                       <div class="ms_pill_container">
+                        <span v-for="category in restaurant.category_id" :key="category.id" class="badge rounded-pill ms_pill m-1">{{ category}} </span>
+                       </div>
+                        
+                        <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button class="ms_btn my-2">Menú</button></router-link>
                     </div>
                     <div>
 
@@ -160,7 +162,7 @@ export default {
 
 
             this.$router.push({ name: 'dish-list', params: id })
-        },
+        }
 
 
     },
@@ -214,6 +216,13 @@ export default {
         background-color: $bg-secondary;
     }
 
+}
+.ms_pill_container{
+    height: 50px;
+    margin-bottom: 10px;
+}
+.ms_pill{
+    background-color: $bg-secondary;
 }
 
 .checkbox-group {
@@ -344,11 +353,12 @@ export default {
 }
 
 .my-card {
-    height: 310px;
-    width: 250px;
+   
+    width: 280px;
     background-color: #fffbfb;
     border-radius: 20px;
     position: relative;
+    box-shadow: 1px 1px  $bg-secondary, 1px 1px $bg-secondary;
 
     &:hover {
         transform: scale(1.03);
@@ -367,7 +377,10 @@ export default {
 .my-card .item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover
+    object-fit: cover;
+    &:hover{
+        transform: scale(1.03);
+    }
 }
 
 
