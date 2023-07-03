@@ -182,13 +182,20 @@ export default {
         });
     },
     sendMail(name, email, phone, address, total_price) {
+      let newArr = []
+      
+      let dishes = this.store.dishes.forEach((el, index) => {
+        newArr.push({...el})
+        newArr[index].quantity = this.store.order[index].quantity
+      })
+
       const payload = {
         name: name,
         email: email,
         phone: phone,
         address: address,
         total_price: total_price,
-        dishes: JSON.stringify(this.store.dishes)
+        dishes: JSON.stringify(newArr)
       }
       axios.post(`${this.store.baseUrl}/contacts`, payload)
         .then(response => {
