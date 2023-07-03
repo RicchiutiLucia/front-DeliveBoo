@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1 class="text-center mb-3">Carrello</h1>
+        <h1 class="text-center my-4">Carrello</h1>
         <div v-if="store.dishes.length > 0" class="d-flex justify-content-center flex-wrap gap-3 my-4">
             <div class="my-card" v-for="(dish, index) in store.dishes" :key="index">
                 <div class="item-image container mt-1">
@@ -43,7 +43,10 @@
         </div>
 
     </div>
-    <Payments :amount="sum.toFixed(2)"></Payments>
+    <Payments :amount="sum.toFixed(2)"  v-if="store.dishes.length > 0"></Payments>
+    <div style="height: 250px;" v-if="store.dishes.length == 0">
+
+    </div>
 </template>
 <script>
 import axios from 'axios';

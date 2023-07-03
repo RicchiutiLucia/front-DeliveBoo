@@ -1,5 +1,5 @@
 <template>
-   <div>
+   <div class="my-footer">
        <div class="bg-footer">
            <div class="container">
                <div class="row test py-5">
@@ -114,8 +114,16 @@
 @use '../style/general.scss';
 @import '../style/partials/_variables.scss';
    img {max-width: 200px; }
+
+   .my-footer{
+    position: static;
+    bottom:5px; 
+    width: 100%;
+   }
    .bg-footer {
        background-color: #0b0b0b;
+       height: 100%;
+   
    }
    .footer-title {
        font-weight: bold;

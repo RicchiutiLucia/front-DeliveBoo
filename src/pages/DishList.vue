@@ -30,8 +30,11 @@
                 </div>
             </div>
         </div>
-
-
+    </div>
+    <div class="d-flex justify-content-center my-3">
+        <router-link class="ms_btn text-decoration-none p-2"
+        :to="{ name: 'home' }">Torna alla Home
+        </router-link>
     </div>
     <h2 v-if="disableBtn" class="text-center text-danger ms-shake-error">Non puoi aggiungere un piatto di un'altro
         ristorante, prima

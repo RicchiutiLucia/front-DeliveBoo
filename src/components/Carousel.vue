@@ -7,14 +7,14 @@
                 <div class="w-100 d-flex justify-content-center flex-wrap">
                     <img :src="restaurant.image" alt="" class="background-image">
                 </div>
-                <div class="text-center pt-2" style="height: 50px;">
-                    <span class="fw-bold">{{ restaurant.name }}</span>
+                <div class="text-center pt-1" style="height: 10px;">
+                    <span class="fw-bold tronca">{{ restaurant.name }}</span>
                 </div>
               
                     
                 <div class="d-flex justify-content-center my-2">
                     <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
-                        <button class="ms_btn">Menú</button>
+                        <button class="ms_btn mt-3">Menú</button>
                     </router-link>
 
                 </div> 
@@ -69,6 +69,12 @@
     &:hover {
         background-color: $bg-secondary;
     }
+}
+.tronca {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+width: 100%;
 }
 
 

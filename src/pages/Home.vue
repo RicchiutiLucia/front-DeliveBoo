@@ -48,7 +48,7 @@
                 <div class="item-content p-1">
                     <div class="text-center">
                         <h3>{{ restaurant.name }}</h3>
-                        <h4> <strong>Categorie: </strong></h4>
+                        <h4> <strong>Categorie: </strong>{{ restaurant.description }}</h4>
                         <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }"><button
                                 class="ms_btn">Menú</button></router-link>
                     </div>
