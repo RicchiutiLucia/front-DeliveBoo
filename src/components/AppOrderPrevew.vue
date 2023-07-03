@@ -90,7 +90,7 @@ export default {
 <style lang="scss" scoped>
 .my-modal {
     width: 300px;
-    top: 25px;
+    top: 22px;
     right: -55px;
     background-color: white;
     border: 1px solid #e5e5e5;
