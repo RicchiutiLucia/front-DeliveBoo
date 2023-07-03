@@ -142,7 +142,7 @@ export default {
           this.newOrder.status = false;
           this.newOrder.total_price = 0;
           this.newOrder.address = '';
-          this.loaderPayment = true;
+
         })
         .catch((error) => {
           console.error(error);
@@ -184,6 +184,7 @@ export default {
           this.store.dishes = [];
           this.store.order = [];
           this.items = []
+          this.loaderPayment = true;
         })
         .catch((error) => {
           console.error(error);
@@ -191,9 +192,9 @@ export default {
     },
     sendMail(name, email, phone, address, total_price) {
       let newArr = []
-      
+
       let dishes = this.store.dishes.forEach((el, index) => {
-        newArr.push({...el})
+        newArr.push({ ...el })
         newArr[index].quantity = this.store.order[index].quantity
       })
 
