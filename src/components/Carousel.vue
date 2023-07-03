@@ -12,7 +12,7 @@
                 </div>
               
                     
-                <div class="d-flex justify-content-center my-2">
+                <div class="d-flex justify-content-center my-1">
                     <router-link :to="{ name: 'dish-list', params: { id: restaurant.id } }">
                         <button class="ms_btn mt-3">Menú</button>
                     </router-link>
