@@ -162,16 +162,6 @@ export default {
 
 
             this.$router.push({ name: 'dish-list', params: id })
-        },
-        displayCategoryName(categoryID){
-            let categoryName = '';
-            this.categories.forEach(category => {
-                if(category.id == categoryID){
-                    categoryName = category.name;
-                }
-           
-            });
-            return categoryName;
         }
 
 
