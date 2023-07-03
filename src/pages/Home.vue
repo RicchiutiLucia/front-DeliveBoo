@@ -37,8 +37,8 @@
     <div v-if="selectedRestaurants">
         <h3 class="text-center">RISTORANTI</h3>
         <div class="d-flex justify-content-center flex-wrap gap-3 my-4">
-
             <div class="my-card" v-for="(restaurant, index) in restaurants" :key="index">
+                <h1>{{ restaurant.category_id }}</h1>
                 <div class="item-image container mt-1">
                     <img :src="restaurant.image">
                 </div>
@@ -101,11 +101,11 @@ export default {
     methods: {
 
         scrollToTop() {
-        window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    },
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        },
         fetchCategories() {
             this.loaderCategories = true;
             axios.get(`${this.store.baseUrl}/categories`).then(res => {
@@ -167,7 +167,7 @@ export default {
     mounted() {
         this.scrollToTop();
         this.fetchCategories();
-        
+
     }
 }
 
