@@ -26,14 +26,15 @@
 
         </div>
         <div v-else>
-            <h2 class="text-center">Il Carrello è vuoto <router-link class="ms-btn text-decoration-none p-1"
+            <div class="alert alert-success alert-dismissible fade show my-2">
+                <strong>Complimenti!</strong> Ordine effettuato con successo!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <h2 class="text-center mt-5">Il Carrello è vuoto <router-link class="ms-btn text-decoration-none p-1"
                     :to="{ name: 'home' }">Torna
                     alla
                     Home</router-link></h2>
-                    <div class="alert alert-success alert-dismissible fade show">
-                        <strong>Complimenti!</strong> Ordine effettuato con successo!
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
+                    
         </div>
     </div>
 
