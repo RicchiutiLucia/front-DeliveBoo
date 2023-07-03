@@ -65,8 +65,6 @@
     <AppFloat></AppFloat>
 
     <Carousel></Carousel>
-
-
     <AppWhyUs></AppWhyUs>
 </template>
 
@@ -107,6 +105,13 @@ export default {
         }
     },
     methods: {
+
+        scrollToTop() {
+        window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    },
         fetchCategories() {
             this.loaderCategories = true;
             axios.get(`${this.store.baseUrl}/categories`).then(res => {
@@ -166,7 +171,9 @@ export default {
 
     },
     mounted() {
+        this.scrollToTop();
         this.fetchCategories();
+        
     }
 }
 

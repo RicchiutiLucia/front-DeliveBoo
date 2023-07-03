@@ -1,19 +1,24 @@
 <template>
-    <h1 class="text-center mb-3">Menu</h1>
+    <h1 class="text-center mb-3">{{ restaurantName }}</h1>
     <div v-if="loaderDisches">
         <Loader></Loader>
     </div>
     <div v-else class="d-flex justify-content-center flex-wrap gap-3 my-4">
         <div class="my-card" v-for="(dish, index) in dishes" :key="index" v-show="dish.visible == true">
-            <div class="item-image container mt-1">
-                <img :src="`http://localhost:8000/storage/${dish.image}`">
+            <div class="item-image container mt-1 d-flex justify-content-center">
+                <img class="h-100" :src="`http://localhost:8000/storage/${dish.image}`">
             </div>
             <div class="item-content p-1 d-flex justify-content-center flex-wrap">
                 <div class="text-center">
-                    <h3>{{ dish.name }}</h3>
-                    
-                    <h4 class="py-1"> <strong>Prezzo:</strong> {{ dish.price }} €</h4>
+                    <div class="p-1 mb-2" style="height: 36px;">
+                        <h3>{{ dish.name }}</h3>
+                    </div>
+                    <div style="height: 45px;">
+                        <h4 class="py-2 text-center"> <strong>Ingredienti: </strong> {{ truncateText(dish.ingredients)}}</h4>
+                    </div>                    
                 </div>
+                <h4 class="pt-3 w-100 text-center"> <strong>Prezzo:</strong> {{ dish.price }} €</h4>
+
                 <div>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="p-2 border border-dark rounded m-2" @click="removeQuantity(dish.id)"><i
@@ -57,13 +62,30 @@ export default {
             quantity: [],
             i: 1,
             disableBtn: false,
-            loaderDisches: false
+            loaderDisches: false,
+            restaurantName: '',
         }
     },
     components: {
         Loader
     },
     methods: {
+
+        truncateText(text) {
+      if (text.length > 50) {
+        return text.slice(0, 50) + '...';
+      } else {
+        return text;
+      }
+    },
+
+        scrollToTop() {
+        window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  ,
         getDishes(id) {
             this.loaderDisches = true;
             axios.get(`${this.store.baseUrl}/dishes/${id}`).then(response => {
@@ -71,6 +93,7 @@ export default {
                 this.dishes = response.data.result;
                 this.createQuantityArray();
                 //console.log(this.quantity);
+                this.restaurantName = response.data.restaurant_name;
                 this.loaderDisches = false;
             })
         },
@@ -227,6 +250,8 @@ export default {
         //console.log(this.$route.params);
         this.getDishes(this.$route.params.id);
         //console.log(localStorage);
+        this.scrollToTop();
+        
     }
 
 }
@@ -239,10 +264,11 @@ export default {
 
 .my-card {
    
-    width: 250px;
+    width: 280px;
     background-color: #fffbfb;
     border-radius: 20px;
     position: relative;
+    box-shadow: 1px 1px  $bg-secondary, 1px 1px $bg-secondary;
 
     &:hover {
         transform: scale(1.03);
@@ -259,7 +285,6 @@ export default {
 }
 
 .my-card .item-image img {
-    width: 100%;
     height: 100%;
     object-fit: cover;
     &:hover{
@@ -280,38 +305,6 @@ export default {
   
 }
 
-
-
-// .dish-box {
-//     border-radius: 30px;
-//     background: rgb(234, 231, 231);
-//     transition: 0.8s cubic-bezier(0.22, 0.78, 0.45, 1.02);
-
-//     min-width: 250px;
-
-//     &:hover {
-//         transform: scale(1.03);
-
-//     }
-// }
-
-// .dish-img {
-
-//     margin-bottom: 30px;
-//     aspect-ratio: 1;
-
-//     img {
-//         object-fit: cover;
-//         overflow: hidden;
-//         max-width: 200px;
-//         height: 200px;
-//         width: 100%;
-
-//         &:hover {
-//             transform: scale(1.02);
-//         }
-//     }
-// }
 
 .ms_btn {
     background-color: $bg-secondary;

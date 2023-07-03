@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <h3 class="text-center py-4">I RISTORANTI CONSIGLIATI</h3>
+    <div class="container" >
+        <h3 class="text-center py-4" id="restaurants-list">I RISTORANTI CONSIGLIATI</h3>
         <div class=" d-flex flex-wrap justify-content-center">
             
             <div class="restaurant-card m-4"  v-for="(restaurant, index) in randomRestaurants" :key="index" >
