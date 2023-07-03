@@ -27,10 +27,7 @@
                     </li>
                 </ul>
                 <hr class="m-0">
-                <div class="d-flex justify-content-between p-2">
-                    <span class="text-bold">Totale:</span>
-                    <h6>{{ this.sum.toFixed(2) }} €</h6>
-                </div>
+                
                 <div class="my-3 container-fluid text-center">
                     <router-link :to="{ name: 'cart' }" class="text-white my-btn text-center">Carrello e
                         check-out</router-link>
@@ -51,7 +48,7 @@ export default {
             store,
             cart: false,
             empty: true,
-            sum: 0
+            
         }
     },
     methods: {
@@ -73,7 +70,6 @@ export default {
                     this.store.dishes = this.store.dishes.sort((a, b) => {
                         return a.id - b.id;
                     });
-                    this.sum += (this.store.order[index].quantity * this.store.dishes[index].price)
                 });
             })
         }
